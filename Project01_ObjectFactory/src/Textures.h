@@ -1,7 +1,6 @@
 #pragma once
-#pragma once
-#include <SDL2\SDL.h>
-#include <SDL2\SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <unordered_map>
 #include <string>
 #include <memory>
@@ -10,7 +9,7 @@ class Textures {
 public:
     // Load a texture from a file and store it with the given key
     static bool load(const std::string& key, const std::string& filePath, SDL_Renderer* renderer) {
-        SDL_Surface* tempSurface = IMG_Load(filePath.c_str());  // Using BMP for simplicity
+        SDL_Surface* tempSurface = IMG_Load(filePath.c_str());
         if (!tempSurface) {
             SDL_Log("Failed to load surface: %s", SDL_GetError());
             return false;
@@ -62,3 +61,5 @@ private:
     // Static map to store textures with custom keys and unique_ptrs for automatic cleanup
     static std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Deleter>> textures;
 };
+
+

@@ -11,6 +11,66 @@
 #include "BodyComponent.h"
 #include "GameObject.h"
 #include "Textures.h"
+#include "CharacterControllerComponent.h"
+#include "FollowComponent.h"
+#include "AIComponent.h"
+#include "SwingComponent.h"
+int main(int argc, char* argv[]) {
+    if (!Engine::init("SDL2 Game Engine", 800, 600))
+    {
+        return -1;
+    }
+    SDL_Renderer* renderer = Engine::getRenderer();
+
+    //Load Textures
+    Textures::load("triangle", ".\\assets\\triangle.png", renderer);
+    Textures::load("square", ".\\assets\\square.png", renderer);
+    Textures::load("circle", ".\\assets\\circle.png", renderer);
+
+    // Create and configure a new GameObject
+    auto triangle = std::make_unique<GameObject>();
+    triangle->add<SpriteComponent>("triangle");
+    triangle->add<BodyComponent>(100,100);
+    triangle->add<CharacterControllerComponent>(10);
+
+    std::shared_ptr<GameObject> triangleShared = std::shared_ptr<GameObject>(triangle.get());
+
+
+    auto square = std::make_unique<GameObject>();
+    square->add<SpriteComponent>("square");
+    square->add<BodyComponent>(30, 100);
+    square->add<FollowComponent>(triangleShared, 50);
+    //square->add<AIComponent>(20);
+
+    auto circle = std::make_unique<GameObject>();
+    circle->add<SpriteComponent>("circle",100,75);
+    circle->add<BodyComponent>(500, 100);
+    circle->add<SwingComponent>(10, .1);
+
+
+
+    // Add GameObject to vector
+    Engine::addGameObject(std::move(triangle));
+    Engine::addGameObject(std::move(square));
+    Engine::addGameObject(std::move(circle));
+    //Engine::addGameObject(std::move(obj2));
+
+    Engine::run();
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //int main()
 //{
 //	//switch path to load different file types
@@ -34,38 +94,3 @@
 //	}
 //	return 0;
 //}
-
-
-
-
-
-
-
-
-int main(int argc, char* argv[]) {
-    if (!Engine::init("SDL2 Game Engine", 800, 600))
-    {
-        return -1;
-    }
-    SDL_Renderer* renderer = Engine::getRenderer();
-
-    //Load Textures
-    Textures::load("hero, "\path". renderer);
-
-    // Create and configure a new GameObject
-    auto obj1 = std::make_unique<GameObject>();
-    obj1->addComponent("Sprite", std::make_unique<SpriteComponent>());
-    obj1->addComponent("Body", std::make_unique<BodyComponent>());
-
-    // Create another GameObject
-    auto obj2 = std::make_unique<GameObject>();
-    obj2->addComponent("Body", std::make_unique<BodyComponent>());
-
-    // Add GameObject to vector
-    Engine::addGameObject(std::move(obj1));
-    Engine::addGameObject(std::move(obj2));
-
-    Engine::run();
-
-    return 0;
-}

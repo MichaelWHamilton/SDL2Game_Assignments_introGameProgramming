@@ -1,4 +1,7 @@
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\SDL2d.dll
+C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\SDL2_imaged.dll
+C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\libpng16d.dll
+C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\zlibd1.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\tinyxml2.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\yaml-cppd.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\temp\Project01_ObjectFactory.vcxproj.CopyComplete

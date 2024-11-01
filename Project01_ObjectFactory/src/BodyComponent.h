@@ -1,8 +1,21 @@
 #pragma once
-#include <iostream>
 #include "Component.h"
+#include <iostream>
+#include "GameObject.h"
+
 class BodyComponent : public Component {
 public:
-    void update() override { std::cout << "Updating BodyComponent\n"; }
-    void draw() override { std::cout << "Drawing BodyComponent\n"; }
+    double xPos, yPos, xVel, yVel;  // Position
+
+    BodyComponent(GameObject& parentObj, double x, double y);
+
+
+    double& x();
+    double& y();
+    double& vx();
+    double& vy();
+
+    void update() override;
+
+    void draw() override;
 };

@@ -1,35 +1,50 @@
 #pragma once
-#include <iostream>
 #include <unordered_map>
-#include <string>
 #include <memory>
+#include <typeindex>
+#include <stdexcept>
+#include <iostream>
 #include "Component.h"
+
+template <typename T>
+int getID() {
+    return std::hash<std::type_index>()(std::type_index(typeid(T)));
+}
+
 class GameObject {
 public:
-    void addComponent(const std::string& name, std::unique_ptr<Component> component) {
-        components[name] = std::move(component);
+    // Add a component to the GameObject.
+    template <typename T, typename... Args>
+    void add(Args&&... args) {
+        static_assert(std::is_base_of<Component, T>::value, "T must be derived from Component");
+        components[getID<T>()] = std::make_unique<T>(*this, std::forward<Args>(args)...);
     }
 
-    void update() {
-        /*for (auto& [name, component] : components) {
-            component->update();
-        }*/
-        for (auto& pair : components) {
-            auto& component = pair.second;
-            component->update();
+    // Get a component by type as a raw pointer.
+    template <typename T>
+    T* get() {
+        auto it = components.find(getID<T>());
+        if (it != components.end()) {
+            return dynamic_cast<T*>(it->second.get());
         }
+        return nullptr;
     }
 
-    void draw() {
-        /*for (auto& [name, component] : components) {
-            component->draw();
-        }*/
+    // Update all components.
+    void update() {
         for (auto& pair : components) {
-            auto& component = pair.second;
-            component->draw();
+            pair.second->update();
+        }
+
+    }
+
+    // Draw all components.
+    void draw() {
+        for (auto& pair : components) {
+            pair.second->draw();
         }
     }
 
 private:
-    std::unordered_map<std::string, std::unique_ptr<Component>> components;
+    std::unordered_map<int, std::unique_ptr<Component>> components;
 };
