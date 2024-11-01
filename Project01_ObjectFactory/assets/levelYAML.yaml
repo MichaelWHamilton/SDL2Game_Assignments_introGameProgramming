@@ -1,0 +1,17 @@
+Body:
+  - type: "Dog"
+    x: 50.0
+    y: 75.0
+    angle: 0.0
+  - type: "Water"
+    x: 500.0
+    y: 25.0
+    angle: 30.0
+  - type: "Rock"
+    x: 120.0
+    y: 10.0
+    angle: 0.0
+  - type: "Tree"
+    x: 200.0
+    y: 10.0
+    angle: 0.0
