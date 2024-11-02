@@ -167,7 +167,7 @@
     <ClInclude Include="src\Object.h" />
     <ClInclude Include="src\Rock.h" />
     <ClInclude Include="src\SpriteComponent.h" />
-    <ClInclude Include="src\SwingComponent.h" />
+    <ClInclude Include="src\MoveUpAndDownComponent.h" />
     <ClInclude Include="src\Textures.h" />
     <ClInclude Include="src\Tree.h" />
     <ClInclude Include="src\Water.h" />

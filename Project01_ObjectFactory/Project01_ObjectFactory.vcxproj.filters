@@ -107,7 +107,7 @@
     <ClInclude Include="src\AIComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SwingComponent.h">
+    <ClInclude Include="src\MoveUpAndDownComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
