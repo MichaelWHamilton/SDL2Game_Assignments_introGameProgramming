@@ -14,18 +14,18 @@
 #include "CharacterControllerComponent.h"
 #include "FollowComponent.h"
 #include "AIComponent.h"
-#include "SwingComponent.h"
+#include "MoveUpAndDownComponent.h"
 int main(int argc, char* argv[]) {
     if (!Engine::init("SDL2 Game Engine", 800, 600))
     {
         return -1;
     }
-    SDL_Renderer* renderer = Engine::getRenderer();
 
-    //Load Textures
-    Textures::load("triangle", ".\\assets\\triangle.png", renderer);
-    Textures::load("square", ".\\assets\\square.png", renderer);
-    Textures::load("circle", ".\\assets\\circle.png", renderer);
+    SDL_Renderer* renderer = Engine::getRenderer();
+    const std::string jsonTextureFile = "./assets/Textures.json";
+    Textures::loadTextures(jsonTextureFile, renderer);
+    
+    
 
     // Create and configure a new GameObject
     auto triangle = std::make_unique<GameObject>();
@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
     auto circle = std::make_unique<GameObject>();
     circle->add<SpriteComponent>("circle",100,75);
     circle->add<BodyComponent>(500, 100);
-    circle->add<SwingComponent>(10, .1);
+    circle->add<MoveUpAndDownComponent>(10, .1);
 
 
 

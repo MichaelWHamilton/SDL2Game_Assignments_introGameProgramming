@@ -4,14 +4,14 @@
 #include <iostream>
 #include "BodyComponent.h"
 
-class SwingComponent : public Component {
+class MoveUpAndDownComponent : public Component {
 private:
     double amplitude; // Distance to swing (half of the total distance)
     double speed; // Speed of the swing
     double time; // Time counter for the oscillation
 
 public:
-    SwingComponent(GameObject& parentObj, double amplitude, double speed)
+    MoveUpAndDownComponent(GameObject& parentObj, double amplitude, double speed)
         : Component(parentObj), amplitude(amplitude), speed(speed), time(0.0) {}
 
     void update() override {

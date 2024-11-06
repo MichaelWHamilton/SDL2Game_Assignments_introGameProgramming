@@ -4,48 +4,57 @@
 #include <unordered_map>
 #include <string>
 #include <memory>
+#include <nlohmann/json.hpp>
+#include <fstream>
 
 class Textures {
 public:
     // Load a texture from a file and store it with the given key
-    static bool load(const std::string& key, const std::string& filePath, SDL_Renderer* renderer) {
-        SDL_Surface* tempSurface = IMG_Load(filePath.c_str());
-        if (!tempSurface) {
-            SDL_Log("Failed to load surface: %s", SDL_GetError());
-            return false;
+    static void loadTextures(const std::string& jsonfile, SDL_Renderer* renderer) {
+
+        std::ifstream file(jsonfile);
+        nlohmann::json jsonData;
+        file >> jsonData;
+
+        for (const auto& textureData : jsonData["textures"]){
+            std::string name = textureData["name"];
+            std::string path = textureData["path"];
+
+            SDL_Surface* tempSurface = IMG_Load(path.c_str());
+            if (!tempSurface) {
+                SDL_Log("Failed to load surface: %s", SDL_GetError());
+                return;
+            }
+
+            // Convert the surface into a texture
+            SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+            SDL_FreeSurface(tempSurface);
+
+            if (!texture) {
+                SDL_Log("Failed to create texture: %s", SDL_GetError());
+                return;
+            }
+            textureMap[name] = std::unique_ptr<SDL_Texture, SDL_Deleter>(texture);
         }
-
-        // Convert the surface into a texture
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
-        SDL_FreeSurface(tempSurface);
-
-        if (!texture) {
-            SDL_Log("Failed to create texture: %s", SDL_GetError());
-            return false;
-        }
-
-        // Store the texture in the map using a unique pointer
-        textures[key] = std::unique_ptr<SDL_Texture, SDL_Deleter>(texture);
-        return true;
     }
 
-    // Get a texture by its key
-    static SDL_Texture* get(const std::string& key) {
-        auto it = textures.find(key);
-        if (it != textures.end()) {
+    // Get a texture by its name
+    static SDL_Texture* get(const std::string& name) {
+        auto it = textureMap.find(name);
+        if (it != textureMap.end()) {
             return it->second.get();  // Return raw pointer to the texture
         }
         return nullptr;
     }
 
-    // Remove a texture by its key
-    static void remove(const std::string& key) {
-        textures.erase(key);
+    // Remove a texture by its name
+    static void remove(const std::string& name) {
+        textureMap.erase(name);
     }
 
     // Clear all textures
     static void clear() {
-        textures.clear();
+        textureMap.clear();
     }
 
 private:
@@ -58,8 +67,8 @@ private:
         }
     };
 
-    // Static map to store textures with custom keys and unique_ptrs for automatic cleanup
-    static std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Deleter>> textures;
+    // Static map to store textures with custom names for keys and unique_ptrs for automatic cleanup
+    static std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Deleter>> textureMap;
 };
 
 

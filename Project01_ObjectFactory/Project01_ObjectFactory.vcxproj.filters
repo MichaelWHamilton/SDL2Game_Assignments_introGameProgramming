@@ -114,5 +114,6 @@
   <ItemGroup>
     <None Include="assets\levelJSON.json" />
     <None Include="assets\levelYAML.yaml" />
+    <None Include="assets\Textures.json" />
   </ItemGroup>
 </Project>

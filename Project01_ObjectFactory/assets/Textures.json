@@ -1,0 +1,16 @@
+{
+  "textures": [
+    {
+      "name": "triangle",
+      "path": ".\\assets\\triangle.png"
+    },
+    {
+      "name": "circle",
+      "path": ".\\assets\\circle.png"
+    },
+    {
+      "name": "square",
+      "path": ".\\assets\\square.png"
+    }
+  ]
+}
