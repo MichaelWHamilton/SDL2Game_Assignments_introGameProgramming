@@ -1,0 +1,55 @@
+{
+  "Objects": [
+    {
+      "type": "triangle",
+      "components": {
+        "SpriteComponent": {
+          "name": "triangle",
+          "width": 64,
+          "height": 64
+        },
+        "BodyComponent": {
+          "x": 100,
+          "y": 100
+        },
+        "CharacterControllerComponent": {"speed" :  10}
+      }
+    },
+    {
+      "type": "square",
+      "components": {
+        "SpriteComponent": {
+          "name": "square",
+          "width": 64,
+          "height": 64
+        },
+        "BodyComponent": {
+          "x": 30,
+          "y": 100
+        },
+        "FollowComponent": {
+          "target": "triangle",
+          "distance": 50
+        }
+      }
+    },
+    {
+      "type": "circle",
+      "components": {
+        "SpriteComponent": {
+          "name": "circle",
+          "width": 100,
+          "height": 75
+        },
+        "BodyComponent": {
+          "x": 500,
+          "y": 100
+        },
+        "MoveUpAndDownComponent": {
+          "range": 10,
+          "speed": 0.1
+        }
+      }
+    }
+  ]
+}

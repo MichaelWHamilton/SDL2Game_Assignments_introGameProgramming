@@ -37,8 +37,8 @@ void Engine::handleEvents() {
 
 // Update all game objects (static)
 void Engine::update() {
-    for (auto& gameObject : gameObjects) {
-        gameObject->update();  // Update each GameObject
+    for (auto& gameObject : mapGameObjects) {
+        gameObject.second->update();  // Update each GameObject
     }
 };
 
@@ -47,8 +47,8 @@ void Engine::render() {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    for (auto& gameObject : gameObjects) {
-        gameObject->draw();  // Draw each GameObject
+    for (auto& gameObject : mapGameObjects) {
+        gameObject.second->draw();  // Draw each GameObject
     }
 
     SDL_RenderPresent(renderer);
@@ -95,6 +95,7 @@ bool Engine::isRunning = false;
 SDL_Window* Engine::window = nullptr;
 SDL_Renderer* Engine::renderer = nullptr;
 std::vector<std::unique_ptr<GameObject>> Engine::gameObjects;
+std::unordered_map<std::string, std::unique_ptr<GameObject>> Engine::mapGameObjects;
 int Engine::width = 0;
 std::vector<std::unique_ptr<GameObject>> Engine::toAdd;
 std::vector<std::unique_ptr<GameObject>> Engine::toDelete;

@@ -110,10 +110,17 @@
     <ClInclude Include="src\MoveUpAndDownComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameObjectLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ComponentsInclude.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\levelJSON.json" />
     <None Include="assets\levelYAML.yaml" />
     <None Include="assets\Textures.json" />
+    <None Include="assets\ObjectsJSON.json" />
   </ItemGroup>
 </Project>

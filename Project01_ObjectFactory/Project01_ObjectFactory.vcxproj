@@ -158,10 +158,12 @@
     <ClInclude Include="src\BodyComponent.h" />
     <ClInclude Include="src\CharacterControllerComponent.h" />
     <ClInclude Include="src\Component.h" />
+    <ClInclude Include="src\ComponentsInclude.h" />
     <ClInclude Include="src\Dog.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\FollowComponent.h" />
     <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\GameObjectLoader.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Library.h" />
     <ClInclude Include="src\Object.h" />
@@ -175,6 +177,7 @@
   <ItemGroup>
     <None Include="assets\levelYAML.yaml" />
     <None Include="assets\levelJSON.json" />
+    <None Include="assets\ObjectsJSON.json" />
     <None Include="assets\Textures.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

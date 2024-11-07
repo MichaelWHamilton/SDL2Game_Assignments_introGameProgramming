@@ -35,6 +35,7 @@ public:
     static void run();
 
     static SDL_Renderer* getRenderer();
+    static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;
     //static b2World* world;
 private:
     static bool isRunning;                               // Engine running state (static)
@@ -43,5 +44,6 @@ private:
     static std::vector<std::unique_ptr<GameObject>> gameObjects;
     static std::vector<std::unique_ptr<GameObject>> toAdd;
     static std::vector<std::unique_ptr<GameObject>> toDelete;// Track game objects
+    
 
 };
