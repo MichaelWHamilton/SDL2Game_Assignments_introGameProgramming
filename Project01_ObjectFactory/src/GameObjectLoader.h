@@ -37,8 +37,8 @@ public:
             if (obj["components"].contains("FollowComponent")) {
                 std::string targetName = obj["components"]["FollowComponent"]["target"];
                 int distance = obj["components"]["FollowComponent"]["distance"];
-                
-                //gameObject->add<FollowComponent>(target, distance);
+                GameObject* target = Engine::mapGameObjects[targetName].get();
+                gameObject->add<FollowComponent>(target, distance);
             }
 
             if (obj["components"].contains("MoveUpAndDownComponent")) {
@@ -53,6 +53,5 @@ public:
 	}
 private:
     std::string name;
-    std::unique_ptr<GameObject> objectToBeFollowed;
-    std::shared_ptr<GameObject> follow;
+    
 };
