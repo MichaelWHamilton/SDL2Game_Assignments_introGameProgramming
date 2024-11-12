@@ -1,14 +1,13 @@
 #pragma once
 #include "Component.h"
 #include "GameObject.h"
-#include <memory> // For std::weak_ptr
+#include <memory> 
 #include <cmath>
 #include "BodyComponent.h"
 
-
 class FollowComponent : public Component {
 private:
-    GameObject* target;   // Weak pointer to the GameObject this component follows
+    GameObject* target;   
     double followDistance;              
 
 public:
@@ -16,10 +15,9 @@ public:
         : Component(parentObj), target(targetObj), followDistance(distance) {}
 
     void update() override {
-        // Attempt to lock the weak pointer
         if (target) {
             GameObject& parent = getParent();
-            // Access the target's BodyComponent position
+            // get target's BodyComponent position
             double targetX = target->get<BodyComponent>()->x();
             double targetY = target->get<BodyComponent>()->y();
 

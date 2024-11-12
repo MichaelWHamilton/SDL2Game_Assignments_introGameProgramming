@@ -2,14 +2,12 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include <memory>  // For std::unique_ptr
-#include "GameObject.h"
 #include "SDL2/SDL_image.h"
 #include <box2d/box2d.h>
-#include "Input.h"
+#include "ComponentsInclude.h"
 
 class Engine {
 public:
-    static int width;
 
     // Initialize the Engine (static)
     static bool init(const char* title, int width, int height);
@@ -34,8 +32,11 @@ public:
     // Run the engine (static)
     static void run();
 
+    static Camera camera;
     static SDL_Renderer* getRenderer();
     static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;
+    static int screenWidth;
+    static int screenHeight;
     //static b2World* world;
 private:
     static bool isRunning;                               // Engine running state (static)

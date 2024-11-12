@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="src\AIComponent.h" />
     <ClInclude Include="src\BodyComponent.h" />
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CharacterControllerComponent.h" />
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ComponentsInclude.h" />

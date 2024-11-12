@@ -116,6 +116,9 @@
     <ClInclude Include="src\ComponentsInclude.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\levelJSON.json" />

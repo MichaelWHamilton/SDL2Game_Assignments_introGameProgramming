@@ -37,6 +37,11 @@ void Engine::handleEvents() {
 
 // Update all game objects (static)
 void Engine::update() {
+    GameObject* player = Engine::mapGameObjects["triangle"].get();
+    //auto p = player->get<BodyComponent>()->xPos;
+    
+    camera.setCenter(player->get<BodyComponent>()->xPos, player->get<BodyComponent>()->yPos);
+
     for (auto& gameObject : mapGameObjects) {
         gameObject.second->update();  // Update each GameObject
     }
@@ -96,10 +101,11 @@ SDL_Window* Engine::window = nullptr;
 SDL_Renderer* Engine::renderer = nullptr;
 std::vector<std::unique_ptr<GameObject>> Engine::gameObjects;
 std::unordered_map<std::string, std::unique_ptr<GameObject>> Engine::mapGameObjects;
-int Engine::width = 0;
+int Engine::screenWidth = 800;
+int Engine::screenHeight = 600;
 std::vector<std::unique_ptr<GameObject>> Engine::toAdd;
 std::vector<std::unique_ptr<GameObject>> Engine::toDelete;
-
+Camera Engine::camera(0.0f, 0.0f, 1.0f, 0.0f);
 
 /*-----------------------------INTEGRATE THIS CODE LATER-------------------------*/
 

@@ -17,13 +17,27 @@ SpriteComponent::SpriteComponent(GameObject& parent, std::string textureKey, int
 
 void SpriteComponent::update(){}
 
-void SpriteComponent::draw(){
-    //SDL_Renderer* renderer = getRenderer();
+//void SpriteComponent::draw(){
+//    //SDL_Renderer* renderer = getRenderer();
+//    auto body = getParent().get<BodyComponent>();
+//    if (body) {
+//        SDL_Rect dst = { static_cast<int>(body->x()), static_cast<int>(body->y()), width, height };
+//
+//        SDL_RenderCopy(Engine::getRenderer(), texture, nullptr, &dst);
+//    }
+//}
+
+void SpriteComponent::draw() {
     auto body = getParent().get<BodyComponent>();
     if (body) {
-        SDL_Rect dst = { static_cast<int>(body->x()), static_cast<int>(body->y()), width, height };
+        // Define destination rectangle based on the position from the BodyComponent
+        SDL_Rect dst = {static_cast<int>(body->x()), static_cast<int>(body->y()),width,height};
 
-        SDL_RenderCopy(Engine::getRenderer(), texture, nullptr, &dst);
+        // Transform the destination rectangle to account for the view (camera) position and scale
+        SDL_Rect transformedDst = Engine::camera.transformRect(dst);
+
+        // Render the texture using the transformed rectangle
+        SDL_RenderCopy(Engine::getRenderer(), texture, nullptr, &transformedDst);
     }
 }
 

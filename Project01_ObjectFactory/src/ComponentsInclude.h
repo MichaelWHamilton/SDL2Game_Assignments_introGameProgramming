@@ -4,3 +4,6 @@
 #include "CharacterControllerComponent.h"
 #include "FollowComponent.h"
 #include "MoveUpAndDownComponent.h"
+#include "Camera.h"
+#include "Input.h"
+#include "Engine.h"
