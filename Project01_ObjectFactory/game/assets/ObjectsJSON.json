@@ -1,3 +1,22 @@
+//{
+//  "Objects": [
+//    {
+//      "type": "player",
+//      "components": {
+//        "SpriteComponent": {
+//          "name": "player",
+//          "width": 41,
+//          "height": 36
+//        },
+//        "BodyComponent": {
+//          "x": 100,
+//          "y": 100
+//        },
+//        "CharacterControllerComponent": { "speed": 10 }
+//      }
+//    }
+//  ]
+//}
 {
   "Objects": [
     {
@@ -12,7 +31,7 @@
           "x": 100,
           "y": 100
         },
-        "CharacterControllerComponent": {"speed" :  10}
+        "CharacterControllerComponent": { "speed": 10 }
       }
     },
     {
