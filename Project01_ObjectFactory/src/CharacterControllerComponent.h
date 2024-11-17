@@ -6,9 +6,8 @@
 #include <string>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include "Component.h"
 #include "BodyComponent.h"
-#include "GameObject.h"
+
 
 class CharacterControllerComponent : public Component {
 public:
@@ -18,7 +17,7 @@ public:
 
     void draw() override;
 private:
-    float speed;
+    float m_speed;
 
     void move(float dx, float dy);
 };

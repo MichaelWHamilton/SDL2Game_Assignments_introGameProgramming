@@ -1,7 +1,7 @@
 #include "CharacterControllerComponent.h"
 
 CharacterControllerComponent::CharacterControllerComponent(GameObject& owner, float speed)
-    : Component(owner), speed(speed) {}
+    : Component(owner), m_speed(speed) {}
 
 void CharacterControllerComponent::update(){
     const Uint8* state = SDL_GetKeyboardState(nullptr);
@@ -14,9 +14,9 @@ void CharacterControllerComponent::update(){
 void CharacterControllerComponent::draw(){}
 
 void CharacterControllerComponent::move(float dx, float dy) {
-    auto body = getParent().get<BodyComponent>();
+    auto body = getParent().getComponent<BodyComponent>();
     if (body) {
-        body->x() += dx * speed;
-        body->y() += dy * speed;
+        body->getX() += dx * m_speed;
+        body->getY() += dy * m_speed;
     }
 }

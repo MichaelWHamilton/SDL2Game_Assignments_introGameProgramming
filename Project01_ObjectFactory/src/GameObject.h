@@ -6,45 +6,37 @@
 #include <iostream>
 #include "Component.h"
 
-template <typename T>
-int getID() {
-    return std::hash<std::type_index>()(std::type_index(typeid(T)));
-}
-
 class GameObject {
 public:
+    template <typename T>
+    int getID() {
+        return std::hash<std::type_index>()(std::type_index(typeid(T)));
+    }
+
+
     // Add a component to the GameObject.
     template <typename T, typename... Args>
-    void add(Args&&... args) {
+    void addComponent(Args&&... args) {
         static_assert(std::is_base_of<Component, T>::value, "T must be derived from Component");
-        components[getID<T>()] = std::make_unique<T>(*this, std::forward<Args>(args)...);
+        m_components[getID<T>()] = std::make_unique<T>(*this, std::forward<Args>(args)...);
     }
 
     // Get a component by type as a raw pointer.
     template <typename T>
-    T* get() {
-        auto it = components.find(getID<T>());
-        if (it != components.end()) {
+    T* getComponent() {
+        auto it = m_components.find(getID<T>());
+        if (it != m_components.end()) {
             return dynamic_cast<T*>(it->second.get());
         }
         return nullptr;
     }
 
     // Update all components.
-    void update() {
-        for (auto& pair : components) {
-            pair.second->update();
-        }
-
-    }
+    void update();
 
     // Draw all components.
-    void draw() {
-        for (auto& pair : components) {
-            pair.second->draw();
-        }
-    }
+    void draw();
 
 private:
-    std::unordered_map<int, std::unique_ptr<Component>> components;
+    std::unordered_map<int, std::unique_ptr<Component>> m_components;
 };

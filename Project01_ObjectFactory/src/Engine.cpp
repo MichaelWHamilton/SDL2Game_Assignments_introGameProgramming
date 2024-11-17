@@ -40,7 +40,7 @@ void Engine::update() {
     GameObject* player = Engine::mapGameObjects["triangle"].get();
     //auto p = player->get<BodyComponent>()->xPos;
     
-    camera.setCenter(player->get<BodyComponent>()->xPos, player->get<BodyComponent>()->yPos);
+    camera.setCenter(player->getComponent<BodyComponent>()->getX(), player->getComponent<BodyComponent>()->getY());
 
     for (auto& gameObject : mapGameObjects) {
         gameObject.second->update();  // Update each GameObject

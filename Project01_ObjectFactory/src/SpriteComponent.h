@@ -17,9 +17,9 @@ public:
 
     void draw() override;
 private:
-    SDL_Texture* texture;
-    int width;               // Width of the sprite
-    int height;
+    SDL_Texture* m_texture;
+    int m_width;               // Width of the sprite
+    int m_height;
 };
 
 //#pragma once

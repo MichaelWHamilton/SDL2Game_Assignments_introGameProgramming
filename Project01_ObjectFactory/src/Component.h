@@ -4,15 +4,15 @@ class GameObject; // Forward declaration
 
 class Component {
 protected:
-    GameObject& parent; // Reference to the parent GameObject
+    GameObject& m_parent; // Reference to the parent GameObject
     //SDL_Renderer* renderer;
 public:
-    Component(GameObject& parent) : parent(parent) {}
+    Component(GameObject& parent) : m_parent(parent) {}
     virtual ~Component() = default;
 
     // Method to get the parent GameObject
     GameObject& getParent() {
-        return parent;
+        return m_parent;
     }
     //SDL_Renderer* getRenderer() const { return renderer; }
 

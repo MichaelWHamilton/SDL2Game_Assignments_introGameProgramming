@@ -140,41 +140,43 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BodyComponent.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\CharacterControllerComponent.cpp" />
-    <ClCompile Include="src\Dog.cpp" />
+    <ClCompile Include="extras\Dog.cpp" />
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\FollowComponent.cpp" />
+    <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\GameObjectLoader.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Library.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Object.cpp" />
-    <ClCompile Include="src\Rock.cpp" />
+    <ClCompile Include="extras\Object.cpp" />
+    <ClCompile Include="extras\Rock.cpp" />
     <ClCompile Include="src\SpriteComponent.cpp" />
     <ClCompile Include="src\Textures.cpp" />
-    <ClCompile Include="src\Tree.cpp" />
-    <ClCompile Include="src\Water.cpp" />
+    <ClCompile Include="extras\Tree.cpp" />
+    <ClCompile Include="extras\Water.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\AIComponent.h" />
-    <ClInclude Include="src\AnimatorComponent.h" />
     <ClInclude Include="src\BodyComponent.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CharacterControllerComponent.h" />
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ComponentsInclude.h" />
-    <ClInclude Include="src\Dog.h" />
+    <ClInclude Include="extras\Dog.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\FollowComponent.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\GameObjectLoader.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Library.h" />
-    <ClInclude Include="src\Object.h" />
-    <ClInclude Include="src\Rock.h" />
+    <ClInclude Include="extras\Object.h" />
+    <ClInclude Include="extras\Rock.h" />
     <ClInclude Include="src\SpriteComponent.h" />
     <ClInclude Include="src\MoveUpAndDownComponent.h" />
     <ClInclude Include="src\Textures.h" />
-    <ClInclude Include="src\Tree.h" />
-    <ClInclude Include="src\Water.h" />
+    <ClInclude Include="extras\Tree.h" />
+    <ClInclude Include="extras\Water.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\levelYAML.yaml" />

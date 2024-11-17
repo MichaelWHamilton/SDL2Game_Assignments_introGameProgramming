@@ -34,14 +34,14 @@ public:
                 SDL_Log("Failed to create texture: %s", SDL_GetError());
                 return;
             }
-            textureMap[name] = std::unique_ptr<SDL_Texture, SDL_Deleter>(texture);
+            m_textureMap[name] = std::unique_ptr<SDL_Texture, SDL_Deleter>(texture);
         }
     }
 
     // Get a texture by its name
     static SDL_Texture* get(const std::string& name) {
-        auto it = textureMap.find(name);
-        if (it != textureMap.end()) {
+        auto it = m_textureMap.find(name);
+        if (it != m_textureMap.end()) {
             return it->second.get();  // Return raw pointer to the texture
         }
         return nullptr;
@@ -49,12 +49,12 @@ public:
 
     // Remove a texture by its name
     static void remove(const std::string& name) {
-        textureMap.erase(name);
+        m_textureMap.erase(name);
     }
 
     // Clear all textures
     static void clear() {
-        textureMap.clear();
+        m_textureMap.clear();
     }
 
 private:
@@ -68,7 +68,7 @@ private:
     };
 
     // Static map to store textures with custom names for keys and unique_ptrs for automatic cleanup
-    static std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Deleter>> textureMap;
+    static std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Deleter>> m_textureMap;
 };
 
 

@@ -19,7 +19,7 @@ public:
     static std::pair<int, int> getMousePosition();
 
 private:
-    static std::set<SDL_Keycode> keysDown;               // Track which keys are down (static)
-    static std::set<Uint8> mouseButtonsDown;             // Track which mouse buttons are down (static)
-    static std::pair<int, int> mousePosition;            // Store the current mouse position (static)
+    static std::set<SDL_Keycode> m_keysDown;               // Track which keys are down (static)
+    static std::set<Uint8> m_mouseButtonsDown;             // Track which mouse buttons are down (static)
+    static std::pair<int, int> m_mousePosition;            // Store the current mouse position (static)
 };

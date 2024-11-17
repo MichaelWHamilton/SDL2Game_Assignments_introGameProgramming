@@ -5,17 +5,20 @@
 
 class BodyComponent : public Component {
 public:
-    double xPos, yPos, xVel, yVel;  // Position
+    
 
     BodyComponent(GameObject& parentObj, double x, double y);
 
 
-    double& x();
-    double& y();
-    double& vx();
-    double& vy();
+    double& getX();
+    double& getY();
+    double& getVx();
+    double& getVy();
 
     void update() override;
 
     void draw() override;
+
+private:
+    double m_xPos, m_yPos, m_xVel, m_yVel;  // Position
 };

@@ -6,19 +6,19 @@
 
 class MoveUpAndDownComponent : public Component {
 private:
-    double amplitude; // Distance to swing (half of the total distance)
-    double speed; // Speed of the swing
-    double time; // Time counter for the oscillation
+    double m_amplitude; // Distance to swing (half of the total distance)
+    double m_speed; // Speed of the swing
+    double m_time; // Time counter for the oscillation
 
 public:
     MoveUpAndDownComponent(GameObject& parentObj, double amplitude, double speed)
-        : Component(parentObj), amplitude(amplitude), speed(speed), time(0.0) {}
+        : Component(parentObj), m_amplitude(amplitude), m_speed(speed), m_time(0.0) {}
 
     void update() override {
-        time += speed; // Increment time based on speed
+        m_time += m_speed; // Increment time based on speed
         
-        auto body = getParent().get<BodyComponent>();
-        body->y() += amplitude * std::sin(time);
+        auto body = getParent().getComponent<BodyComponent>();
+        body->getY() += m_amplitude * std::sin(m_time);
     }
 
     void draw() override {
