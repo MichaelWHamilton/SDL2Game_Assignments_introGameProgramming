@@ -1,6 +1,5 @@
 #include "GameObjectLoader.h"
 
-
 GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
     std::ifstream file(objectFilePath);
     nlohmann::json jsonData;
@@ -8,18 +7,20 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
 
     for (const auto& obj : jsonData["Objects"]) {
         auto gameObject = std::make_unique<GameObject>();
-
+        int width, height;
         if (obj["components"].contains("SpriteComponent")) {
             m_name = obj["components"]["SpriteComponent"]["name"];
-            int width = obj["components"]["SpriteComponent"]["width"];
-            int height = obj["components"]["SpriteComponent"]["height"];
-            gameObject->addComponent<SpriteComponent>(m_name, width, height);
+            //width = obj["components"]["SpriteComponent"]["width"];
+            //height = obj["components"]["SpriteComponent"]["height"];
+            gameObject->addComponent<SpriteComponent>(m_name);
         }
 
         if (obj["components"].contains("BodyComponent")) {
             int x = obj["components"]["BodyComponent"]["x"];
             int y = obj["components"]["BodyComponent"]["y"];
-            gameObject->addComponent<BodyComponent>(x, y);
+            width = obj["components"]["BodyComponent"]["width"];
+            height = obj["components"]["BodyComponent"]["height"];
+            gameObject->addComponent<BodyComponent>(x, y, width, height);
         }
 
         if (obj["components"].contains("CharacterControllerComponent")) {

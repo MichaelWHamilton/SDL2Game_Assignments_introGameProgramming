@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BodyComponent.cpp" />
+    <ClCompile Include="src\Box2DComponent.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\CharacterControllerComponent.cpp" />
     <ClCompile Include="extras\Dog.cpp" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BodyComponent.h" />
+    <ClInclude Include="src\Box2DComponent.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CharacterControllerComponent.h" />
     <ClInclude Include="src\Component.h" />

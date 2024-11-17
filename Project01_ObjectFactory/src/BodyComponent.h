@@ -6,12 +6,12 @@
 class BodyComponent : public Component {
 public:
     
-
-    BodyComponent(GameObject& parentObj, double x, double y);
-
+    BodyComponent(GameObject& parentObj, double x, double y, double width, double height);
 
     double& getX();
     double& getY();
+    double& getWidth();
+    double& getHeight();
     double& getVx();
     double& getVy();
 
@@ -20,5 +20,5 @@ public:
     void draw() override;
 
 private:
-    double m_xPos, m_yPos, m_xVel, m_yVel;  // Position
+    double m_width, m_height, m_xPos, m_yPos, m_xVel, m_yVel;  // Position
 };
