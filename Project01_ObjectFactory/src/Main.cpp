@@ -12,6 +12,8 @@ int main(int argc, char* argv[]) {
     {
         return -1;
     }
+    
+    //TODO make main only contain Engine::run() perhaps?
 
     SDL_Renderer* renderer = Engine::getRenderer();
     const std::string jsonTextureFile = "./assets/Textures.json";
