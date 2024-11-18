@@ -1,12 +1,11 @@
 /*Michael Hamilton*/
 #define SDL_MAIN_HANDLED
 #include <iostream>
-#include "Engine.h"
 #include <memory>
 #include <string>
 #include <vector>
-#include "Textures.h"
-#include "GameObjectLoader.h"
+#include "ComponentsInclude.h"
+
 int main(int argc, char* argv[]) {
     if (!Engine::init("SDL2 Game Engine", 800, 600))
     {
