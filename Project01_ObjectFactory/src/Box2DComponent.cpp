@@ -1,29 +1,35 @@
 #include "Box2DComponent.h"
 
-Box2DComponent::Box2DComponent(GameObject& parent, b2World* physicsWorld, BodyComponent* associatedBody, float posX, float posY, float width, float height)
-    :Component(parent), world(physicsWorld), bodyComponent(associatedBody)
+Box2DComponent::Box2DComponent(GameObject& parent, b2World& world)
+    :Component(parent), m_world(world), m_body(nullptr)
 {
+    auto bodyComp = parent.getComponent<BodyComponent>();
+    if (!bodyComp) {
+        throw std::runtime_error("Box2DComponent requires a BodyComponent in the same GameObject.");
+        exit;
+    }
+
     // Create a Box2D body
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(posX, posY);
-    body = world->CreateBody(&bodyDef);
+    bodyDef.position.Set(bodyComp->getX(), bodyComp->getY());
+    m_body = world.CreateBody(&bodyDef);
 
     // Attach a rectangular fixture
     b2PolygonShape boxShape;
-    boxShape.SetAsBox(width / 2.0f, height / 2.0f);
+    boxShape.SetAsBox(bodyComp->getWidth() / 2.0f, bodyComp->getWidth() / 2.0f);
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &boxShape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
 
-    body->CreateFixture(&fixtureDef);
+    m_body->CreateFixture(&fixtureDef);
 }
 
 Box2DComponent::~Box2DComponent() {
-    if (body) {
-        world->DestroyBody(body);
+    if (m_body) {
+        m_world.DestroyBody(m_body);
     }
 }
 
@@ -41,5 +47,5 @@ void Box2DComponent::update() {
 }
 
 b2Body* Box2DComponent::getBody() {
-    return body;
+    return m_body;
 }

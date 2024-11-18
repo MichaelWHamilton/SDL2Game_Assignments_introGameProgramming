@@ -7,12 +7,10 @@
 
 class Box2DComponent : public Component {
 private:
-    b2Body* body;
-    b2World* world;
-    BodyComponent* bodyComponent; // Reference to synchronize position
-
+    b2Body* m_body;
+    b2World& m_world;
 public:
-    Box2DComponent(GameObject& parent, b2World* physicsWorld, BodyComponent* associatedBody, float posX, float posY, float width, float height);
+    Box2DComponent(GameObject& parent, b2World& world);
 
     ~Box2DComponent();
 
