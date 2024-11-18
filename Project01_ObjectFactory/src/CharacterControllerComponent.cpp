@@ -1,4 +1,5 @@
 #include "CharacterControllerComponent.h"
+#include "ComponentsInclude.h"
 
 CharacterControllerComponent::CharacterControllerComponent(GameObject& owner, float speed)
     : Component(owner), m_speed(speed) {}

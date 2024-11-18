@@ -1,10 +1,8 @@
 #pragma once
 #include "Component.h"
 #include <iostream>
-#include "GameObject.h"
 
-//class SpriteComponent;
-
+class GameObject;
 class BodyComponent : public Component {
 public:
     

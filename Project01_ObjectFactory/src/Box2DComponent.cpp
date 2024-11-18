@@ -1,4 +1,5 @@
 #include "Box2DComponent.h"
+#include "ComponentsInclude.h"
 
 Box2DComponent::Box2DComponent(GameObject& parent, b2World& world)
     :Component(parent), m_world(world), m_body(nullptr)

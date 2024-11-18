@@ -1,10 +1,9 @@
 #pragma once
 #include "Component.h"
-#include "GameObject.h"
 #include <memory> 
 #include <cmath>
-#include "BodyComponent.h"
 
+class GameObject;
 class FollowComponent : public Component {
 private:
     GameObject* m_target;   

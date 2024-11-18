@@ -1,13 +1,11 @@
 #pragma once
-#include "Engine.h"
-#include "Component.h"
-#include "BodyComponent.h"
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <iostream>
+#include <string>
 #include <memory>
-#include "Textures.h"
+#include "Component.h"
 
-#include "GameObject.h"
+class GameObject;
 class SpriteComponent : public Component {
 public:
     SpriteComponent(GameObject& parent, std::string textureKey, std::string name);

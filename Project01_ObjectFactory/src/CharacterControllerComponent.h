@@ -1,14 +1,10 @@
 #pragma once
 #include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <string>
+#include <memory>
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "BodyComponent.h"
+#include "Component.h"
 
-
+class GameObject;
 class CharacterControllerComponent : public Component {
 public:
     CharacterControllerComponent(GameObject& owner, float speed);

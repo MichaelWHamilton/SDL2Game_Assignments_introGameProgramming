@@ -1,5 +1,5 @@
 #include "BodyComponent.h"
-#include "SpriteComponent.h"
+#include "ComponentsInclude.h"
 BodyComponent::BodyComponent(GameObject& parentObj, double x, double y, double width, double height)
     : Component(parentObj), m_xPos(x), m_yPos(y), m_xVel(x), m_yVel(y), m_width(width), m_height(height) {}
 

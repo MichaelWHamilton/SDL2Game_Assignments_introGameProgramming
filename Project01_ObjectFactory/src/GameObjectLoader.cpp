@@ -1,5 +1,5 @@
 #include "GameObjectLoader.h"
-
+#include "ComponentsInclude.h"
 GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
     std::ifstream file(objectFilePath);
     nlohmann::json jsonData;

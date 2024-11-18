@@ -1,21 +1,19 @@
 #pragma once
 
-class GameObject; // Forward declaration
+class GameObject;
 
 class Component {
-protected:
-    GameObject& m_parent; // Reference to the parent GameObject
-    //SDL_Renderer* renderer;
+private:
+    GameObject& m_parent; //TODO
 public:
     Component(GameObject& parent) : m_parent(parent) {}
     virtual ~Component() = default;
 
-    // Method to get the parent GameObject
+    //get parent GameObject
     GameObject& getParent() {
         return m_parent;
     }
-    //SDL_Renderer* getRenderer() const { return renderer; }
-
-    virtual void update() = 0; // Pure virtual function for updating
-    virtual void draw() = 0;   // Pure virtual function for drawing
+    
+    virtual void update() = 0; 
+    virtual void draw() = 0;   
 };

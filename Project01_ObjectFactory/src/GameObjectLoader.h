@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 #include <nlohmann/json.hpp>
-#include "Engine.h"
 
 class GameObjectLoader {
 public:

@@ -1,10 +1,10 @@
 #pragma once
 #include "Component.h"
-#include "GameObject.h"
-#include "BodyComponent.h"
+#include <iostream>
 #include <box2d/box2d.h>
 #include <memory>
 
+class GameObject;
 class Box2DComponent : public Component {
 private:
     b2Body* m_body;

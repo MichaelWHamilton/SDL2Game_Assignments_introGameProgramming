@@ -1,14 +1,16 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <vector>
-#include <memory>  // For std::unique_ptr
-#include "SDL2/SDL_image.h"
+#include <memory>
+#include <string>
+#include <SDL2/SDL_image.h>
 #include <box2d/box2d.h>
-#include "ComponentsInclude.h"
+#include <unordered_map>
 
+class GameObject;
+class Camera;
 class Engine {
 public:
-
     // Initialize the Engine (static)
     static bool init(const char* title, int width, int height);
 
@@ -39,12 +41,12 @@ public:
     static int screenHeight;
     //static b2World* world;
 private:
-    static bool isRunning;                               // Engine running state (static)
-    static SDL_Window* window;                           // SDL window (static)
-    static SDL_Renderer* renderer;                       // SDL renderer (static)
+    static bool isRunning;                               
+    static SDL_Window* window; 
+    static SDL_Renderer* renderer;         
     static std::vector<std::unique_ptr<GameObject>> gameObjects;
     static std::vector<std::unique_ptr<GameObject>> toAdd;
-    static std::vector<std::unique_ptr<GameObject>> toDelete;// Track game objects
+    static std::vector<std::unique_ptr<GameObject>> toDelete;
     
 
 };

@@ -1,9 +1,9 @@
 #pragma once
 #include "Component.h"
-#include <cmath> // For sin function
+#include <cmath>
 #include <iostream>
-#include "BodyComponent.h"
 
+class GameObject;
 class MoveUpAndDownComponent : public Component {
 private:
     double m_amplitude; // Distance to swing (half of the total distance)
@@ -11,17 +11,9 @@ private:
     double m_time; // Time counter for the oscillation
 
 public:
-    MoveUpAndDownComponent(GameObject& parentObj, double amplitude, double speed)
-        : Component(parentObj), m_amplitude(amplitude), m_speed(speed), m_time(0.0) {}
+    MoveUpAndDownComponent(GameObject& parentObj, double amplitude, double speed);
 
-    void update() override {
-        m_time += m_speed; // Increment time based on speed
-        
-        auto body = getParent().getComponent<BodyComponent>();
-        body->getY() += m_amplitude * std::sin(m_time);
-    }
+    void update() override;
 
-    void draw() override {
-        
-    }
+    void draw() override;
 };

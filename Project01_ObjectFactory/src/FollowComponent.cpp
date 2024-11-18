@@ -1,4 +1,5 @@
 #include "FollowComponent.h"
+#include "ComponentsInclude.h"
 
 FollowComponent::FollowComponent(GameObject& parentObj, GameObject* targetObj, double distance)
     : Component(parentObj), m_target(targetObj), m_followDistance(distance) {}

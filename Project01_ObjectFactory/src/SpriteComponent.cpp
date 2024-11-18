@@ -1,5 +1,5 @@
 #include "SpriteComponent.h"
-
+#include "ComponentsInclude.h"
 SpriteComponent::SpriteComponent(GameObject& parent, std::string textureKey, std::string name)
     : Component(parent), m_texture(nullptr), m_name(name){
     m_texture = Textures::get(textureKey);

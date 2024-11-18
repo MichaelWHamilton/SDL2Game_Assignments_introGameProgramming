@@ -153,6 +153,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="extras\Object.cpp" />
     <ClCompile Include="extras\Rock.cpp" />
+    <ClCompile Include="src\MoveUpAndDownComponent.cpp" />
     <ClCompile Include="src\SpriteComponent.cpp" />
     <ClCompile Include="src\Textures.cpp" />
     <ClCompile Include="extras\Tree.cpp" />
