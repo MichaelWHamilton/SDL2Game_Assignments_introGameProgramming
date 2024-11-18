@@ -1,7 +1,7 @@
 #include "SpriteComponent.h"
 
-SpriteComponent::SpriteComponent(GameObject& parent, std::string textureKey)
-    : Component(parent), m_texture(nullptr){
+SpriteComponent::SpriteComponent(GameObject& parent, std::string textureKey, std::string name)
+    : Component(parent), m_texture(nullptr), m_name(name){
     m_texture = Textures::get(textureKey);
     if (!m_texture) {
         SDL_Log("Failed to load texture for key: %s", textureKey.c_str());
@@ -15,7 +15,10 @@ SpriteComponent::SpriteComponent(GameObject& parent, std::string textureKey)
 //    }
 //}
 
-void SpriteComponent::update(){}
+void SpriteComponent::update(){
+    
+    std::cout << "Sprite update function called!" << std::endl;
+}
 
 void SpriteComponent::draw() {
     auto body = getParent().getComponent<BodyComponent>();
@@ -30,3 +33,7 @@ void SpriteComponent::draw() {
         SDL_RenderCopy(Engine::getRenderer(), m_texture, nullptr, &transformedDst);
     }
 }
+std::string SpriteComponent::getName() {
+    return m_name;
+}
+

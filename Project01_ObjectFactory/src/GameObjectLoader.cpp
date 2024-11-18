@@ -8,11 +8,13 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
     for (const auto& obj : jsonData["Objects"]) {
         auto gameObject = std::make_unique<GameObject>();
         int width, height;
+        std::string texture, name;
         if (obj["components"].contains("SpriteComponent")) {
-            m_name = obj["components"]["SpriteComponent"]["name"];
+            texture = obj["components"]["SpriteComponent"]["texture"];
+            name = obj["components"]["SpriteComponent"]["name"];
             //width = obj["components"]["SpriteComponent"]["width"];
             //height = obj["components"]["SpriteComponent"]["height"];
-            gameObject->addComponent<SpriteComponent>(m_name);
+            gameObject->addComponent<SpriteComponent>(texture, name);
         }
 
         if (obj["components"].contains("BodyComponent")) {
@@ -41,7 +43,7 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
             gameObject->addComponent<MoveUpAndDownComponent>(range, speed);
         }
 
-        Engine::mapGameObjects.insert({ m_name, std::move(gameObject) });
+        Engine::mapGameObjects.insert({ name, std::move(gameObject) });
         //Engine::addGameObject(std::move(gameObject));
     }
 }

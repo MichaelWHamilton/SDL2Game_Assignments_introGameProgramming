@@ -10,7 +10,7 @@
           "y": 100
         },
         "CharacterControllerComponent": { "speed": 10 },
-        "SpriteComponent": { "name": "triangle" }
+        "SpriteComponent": { "texture": "triangle", "name": "triangle" }
       }
     },
     {
@@ -26,7 +26,7 @@
           "distance": 50,
           "target": "triangle"
         },
-        "SpriteComponent": { "name": "square" }
+        "SpriteComponent": { "texture": "square", "name": "square" }
       }
     },
     {
@@ -42,7 +42,7 @@
           "range": 10,
           "speed": 0.1
         },
-        "SpriteComponent": { "name": "circle" }
+        "SpriteComponent": { "texture": "circle", "name" : "circle" }
       }
     }
   ]

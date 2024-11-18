@@ -3,6 +3,8 @@
 #include <iostream>
 #include "GameObject.h"
 
+//class SpriteComponent;
+
 class BodyComponent : public Component {
 public:
     

@@ -1,5 +1,5 @@
 #include "BodyComponent.h"
-
+#include "SpriteComponent.h"
 BodyComponent::BodyComponent(GameObject& parentObj, double x, double y, double width, double height)
     : Component(parentObj), m_xPos(x), m_yPos(y), m_xVel(x), m_yVel(y), m_width(width), m_height(height) {}
 
@@ -14,6 +14,10 @@ void BodyComponent::update() {
     //// Example: Move the object downwards
     //y += 1.0f;
     //std::cout << "BodyComponent updated position: (" << x << ", " << y << ")\n";
+    auto obj = getParent().getComponent<SpriteComponent>();
+    
+    std::cout << "Body update function called!" << std::endl;
+    std::cout << obj->getName() << " X Y coords: ( " << m_xPos << " , " << m_yPos << " )";
 }
 
 void BodyComponent::draw() {
