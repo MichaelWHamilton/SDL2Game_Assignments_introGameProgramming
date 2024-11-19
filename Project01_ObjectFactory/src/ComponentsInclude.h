@@ -11,3 +11,4 @@
 #include "Textures.h"
 #include "GameObject.h"
 #include "GameObjectLoader.h"
+#include "Box2DComponent.h"

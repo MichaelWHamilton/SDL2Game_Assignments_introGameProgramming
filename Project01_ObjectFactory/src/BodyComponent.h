@@ -15,6 +15,12 @@ public:
     double& getVx();
     double& getVy();
 
+
+    void setX(double x);
+    void setY(double y);
+    void setVx(double vx);
+    void setVy(double xy);
+
     void update() override;
 
     void draw() override;

@@ -7,7 +7,7 @@
 #include "ComponentsInclude.h"
 
 int main(int argc, char* argv[]) {
-    if (!Engine::init("SDL2 Game Engine", 800, 600))
+    if (!Engine::init("SDL2 Game Engine", 1280, 720))
     {
         return -1;
     }

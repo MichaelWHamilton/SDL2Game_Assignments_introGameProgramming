@@ -10,7 +10,11 @@
           "y": 100
         },
         "CharacterControllerComponent": { "speed": 10 },
-        "SpriteComponent": { "texture": "triangle", "name": "triangle" }
+        "SpriteComponent": {
+          "texture": "triangle",
+          "name": "triangle"
+        },
+        "Box2DComponent": {"bodyType": "Box2DDynamic"}
       }
     },
     {
@@ -42,8 +46,28 @@
           "range": 10,
           "speed": 0.1
         },
-        "SpriteComponent": { "texture": "circle", "name" : "circle" }
+        "SpriteComponent": {
+          "texture": "circle",
+          "name": "circle"
+        }
+      }
+    },
+    {
+      "type": "brick",
+      "components": {
+        "BodyComponent": {
+          "height": 128,
+          "width": 128,
+          "x": 0,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick"
+        },
+        "Box2DComponent": {"bodyType": "Box2DStatic"}
       }
     }
+
   ]
 }

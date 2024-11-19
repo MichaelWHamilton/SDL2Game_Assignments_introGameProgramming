@@ -187,6 +187,10 @@
     <None Include="assets\ObjectsJSON.json" />
     <None Include="assets\Textures.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\128x128\Bricks\Bricks_01-128x128.png" />
+    <Image Include="..\..\..\..\Desktop\128x128\Bricks\Bricks_02-128x128.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

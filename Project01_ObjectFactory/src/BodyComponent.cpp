@@ -10,6 +10,12 @@ double& BodyComponent::getHeight() { return m_height; }
 double& BodyComponent::getVx() { return m_xVel; }
 double& BodyComponent::getVy() { return m_yVel; }
 
+void BodyComponent::setX(double x) { m_xPos = x; };
+void BodyComponent::setY(double y) { m_yPos = y; };
+
+void BodyComponent::setVx(double vx) { m_xVel=vx; }
+void BodyComponent::setVy(double vy) { m_yVel=vy; }
+
 void BodyComponent::update() {
     //// Example: Move the object downwards
     //y += 1.0f;

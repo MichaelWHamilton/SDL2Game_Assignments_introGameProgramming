@@ -30,7 +30,10 @@ public:
     static bool running();
     // Add a GameObject to the engine (static)
     static void addGameObject(std::unique_ptr<GameObject> gameObject);
-
+    
+    static b2Body* registerGameObject(GameObject& gameObject);
+    // Simulate the world
+    //static void simulateWorld(float timeStep, int velocityIterations, int positionIterations);
     // Run the engine (static)
     static void run();
 
@@ -39,7 +42,7 @@ public:
     static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;
     static int screenWidth;
     static int screenHeight;
-    //static b2World* world;
+    static b2World m_world;
 private:
     static bool isRunning;                               
     static SDL_Window* window; 
@@ -47,6 +50,6 @@ private:
     static std::vector<std::unique_ptr<GameObject>> gameObjects;
     static std::vector<std::unique_ptr<GameObject>> toAdd;
     static std::vector<std::unique_ptr<GameObject>> toDelete;
-    
+    static std::unordered_map<GameObject*, b2Body*> m_bodyMap;
 
 };

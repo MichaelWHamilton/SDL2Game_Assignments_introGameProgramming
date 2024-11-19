@@ -43,6 +43,11 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
             gameObject->addComponent<MoveUpAndDownComponent>(range, speed);
         }
 
+        if (obj["components"].contains("Box2DComponent")) {
+            auto bodyType = obj["components"]["Box2DComponent"]["bodyType"];
+            gameObject->addComponent<Box2DComponent>();
+        }
+
         Engine::mapGameObjects.insert({ name, std::move(gameObject) });
         //Engine::addGameObject(std::move(gameObject));
     }

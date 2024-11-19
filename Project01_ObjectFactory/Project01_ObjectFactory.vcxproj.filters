@@ -144,4 +144,12 @@
     <None Include="assets\Textures.json" />
     <None Include="assets\ObjectsJSON.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\128x128\Bricks\Bricks_01-128x128.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\128x128\Bricks\Bricks_02-128x128.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

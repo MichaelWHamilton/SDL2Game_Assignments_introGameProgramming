@@ -84,6 +84,7 @@ void Engine::addGameObject(std::unique_ptr<GameObject> gameObject) {
 void Engine::run() {
     while (isRunning) {
         handleEvents();
+        //simulateWorld(1.0f / 60.0f, 8, 3);
         update();
         render();
         SDL_Delay(16);
@@ -96,6 +97,26 @@ SDL_Renderer* Engine::getRenderer() {
     return renderer;
 };
 
+b2Body* Engine::registerGameObject(GameObject& gameObject) {
+    auto bodyComponent = gameObject.getComponent<BodyComponent>();
+
+    // Create a b2BodyDef using the position and properties from BodyComponent
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody; // Default to dynamic; customize as needed
+    bodyDef.position.Set(bodyComponent->getX(), bodyComponent->getY());
+
+    // Add the body to the world
+    b2Body* body = m_world.CreateBody(&bodyDef);
+    m_bodyMap[&gameObject] = body;
+
+    return body;
+}
+
+// Simulate the world
+//void Engine::simulateWorld(float timeStep, int velocityIterations, int positionIterations) {
+//    m_world.Step(timeStep, velocityIterations, positionIterations);
+//}
+
 bool Engine::isRunning = false;
 SDL_Window* Engine::window = nullptr;
 SDL_Renderer* Engine::renderer = nullptr;
@@ -106,7 +127,8 @@ int Engine::screenHeight = 600;
 std::vector<std::unique_ptr<GameObject>> Engine::toAdd;
 std::vector<std::unique_ptr<GameObject>> Engine::toDelete;
 Camera Engine::camera(0.0f, 0.0f, 1.0f, 0.0f);
-
+b2World Engine::m_world(b2Vec2(0.0f, -9.8f));
+std::unordered_map<GameObject*, b2Body*> Engine::m_bodyMap;
 /*-----------------------------INTEGRATE THIS CODE LATER-------------------------*/
 
 //
