@@ -17,7 +17,7 @@ SpriteComponent::SpriteComponent(GameObject& parent, std::string textureKey, std
 
 void SpriteComponent::update(){
     
-    std::cout << "Sprite update function called!" << std::endl;
+    //std::cout << "Sprite update function called!" << std::endl;
 }
 
 void SpriteComponent::draw() {

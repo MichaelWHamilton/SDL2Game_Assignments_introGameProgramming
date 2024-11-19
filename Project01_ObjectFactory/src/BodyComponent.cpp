@@ -1,7 +1,7 @@
 #include "BodyComponent.h"
 #include "ComponentsInclude.h"
 BodyComponent::BodyComponent(GameObject& parentObj, double x, double y, double width, double height)
-    : Component(parentObj), m_xPos(x), m_yPos(y), m_xVel(x), m_yVel(y), m_width(width), m_height(height) {}
+    : Component(parentObj), m_xPos(x), m_yPos(y), m_xVel(0), m_yVel(0), m_width(width), m_height(height) {}
 
 double& BodyComponent::getX() { return m_xPos; }
 double& BodyComponent::getY() { return m_yPos; }

@@ -4,60 +4,45 @@
 Box2DComponent::Box2DComponent(GameObject& parent)
     :Component(parent), m_body(nullptr)
 {
-    m_body = Engine::registerGameObject(parent);
-
-    if (m_body) {
-        auto bodyComponent = parent.getComponent<BodyComponent>();
-
-        // Define the shape and attach it as a fixture
-        b2PolygonShape boxShape;
-        boxShape.SetAsBox(bodyComponent->getWidth() / 2.0f, bodyComponent->getHeight() / 2.0f);
-
-        b2FixtureDef fixtureDef;
-        fixtureDef.shape = &boxShape;
-        fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.3f;
-
-        m_body->CreateFixture(&fixtureDef);
+    auto bodyComp = parent.getComponent<BodyComponent>();
+    if (!bodyComp) {
+        throw std::runtime_error("Box2DComponent requires a BodyComponent in the same GameObject.");
+        exit;
     }
 
+    // Create a Box2D body
+    b2BodyDef bodyDef;
+    Box2DBodyType bodyType = box2DDynamic;
+    switch (bodyType) {
+    case box2DDynamic:
+        bodyDef.type = b2_dynamicBody;
+        break;
+    case box2DStatic:
+        bodyDef.type = b2_staticBody;
+        break;
+    case box2DKinematic:
+        bodyDef.type = b2_kinematicBody;
+        break;
+    }
 
+    bodyDef.position.Set((float)bodyComp->getX(), (float)bodyComp->getY());
+    m_body = Engine::m_world.CreateBody(&bodyDef);
 
-    //auto bodyComp = parent.getComponent<BodyComponent>();
-    //if (!bodyComp) {
-    //    throw std::runtime_error("Box2DComponent requires a BodyComponent in the same GameObject.");
-    //    exit;
-    //}
+    // Attach a rectangular fixture
+    b2PolygonShape boxShape;
+    boxShape.SetAsBox((float)bodyComp->getWidth() / 2.0f, (float)bodyComp->getWidth() / 2.0f);//add scale
 
-    //// Create a Box2D body
-    //b2BodyDef bodyDef;
+    //define fixture
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &boxShape;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.3f;
+    m_body->GetUserData().pointer = (uintptr_t)this;
+    m_body->CreateFixture(&fixtureDef);
 
-    //switch (bodyType){
-    //case box2DDynamic:
-    //    bodyDef.type = b2_dynamicBody;
-    //    break;
-    //case box2DStatic:
-    //    bodyDef.type = b2_staticBody;
-    //    break;
-    //case box2DKinematic:
-    //    bodyDef.type = b2_kinematicBody;
-    //    break;
-    //}
-
-    //bodyDef.type = b2_dynamicBody;
-    //bodyDef.position.Set(bodyComp->getX(), bodyComp->getY());
-    //m_body = Engine::world.CreateBody(&bodyDef);
-
-    //// Attach a rectangular fixture
-    //b2PolygonShape boxShape;
-    //boxShape.SetAsBox(bodyComp->getWidth() / 2.0f, bodyComp->getWidth() / 2.0f);
-
-    //b2FixtureDef fixtureDef;
-    //fixtureDef.shape = &boxShape;
-    //fixtureDef.density = 1.0f;
-    //fixtureDef.friction = 0.3f;
-
-    //m_body->CreateFixture(&fixtureDef);
+    // Set SDL rect dimensions in pixels
+        //rect.w = static_cast<int>(width);
+        //rect.h = static_cast<int>(height);
 }
 
 Box2DComponent::~Box2DComponent() {
@@ -82,23 +67,22 @@ void Box2DComponent::update() {
     int positionIterations = 3;   // Recommended: 3 position iterations
     Engine::m_world.Step(timeStep, velocityIterations, positionIterations);
 
-    // Sync Box2D bodies with BodyComponents
-    for (auto& gameObject : Engine::mapGameObjects) {
-        auto bodyComp = gameObject.second->getComponent<BodyComponent>();
-        auto box2dComp = gameObject.second->getComponent<Box2DComponent>();
+    
+    auto bodyComp = getParent().getComponent<BodyComponent>();
+    auto box2dComp = getParent().getComponent<Box2DComponent>();
 
-        if (bodyComp && box2dComp) {
-            const b2Body* b2Body = box2dComp->getBody();
+    //if (bodyComp && box2dComp) {
+    //    const b2Body* b2Body = box2dComp->getBody();
 
-            // Update the BodyComponent with the new Box2D body position
-            bodyComp->setX(b2Body->GetPosition().x);
-            bodyComp->setY(b2Body->GetPosition().y);
+    //    // Update the BodyComponent with the new Box2D body position
+    //    bodyComp->setX(b2Body->GetPosition().x);
+    //    bodyComp->setY(b2Body->GetPosition().y);
 
-            // Optionally update velocities or other properties
-            //bodyComp->setVx(b2Body->GetLinearVelocity().x);
-            //bodyComp->setVy(b2Body->GetLinearVelocity().y);
-        }
-    }
+    //    // Optionally update velocities or other properties
+    //    bodyComp->setVx(b2Body->GetLinearVelocity().x);
+    //    bodyComp->setVy(b2Body->GetLinearVelocity().y);
+    //}
+    
 }
 
 b2Body* Box2DComponent::getBody() {

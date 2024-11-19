@@ -144,6 +144,7 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\CharacterControllerComponent.cpp" />
     <ClCompile Include="extras\Dog.cpp" />
+    <ClCompile Include="src\CollisionListener.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\FollowComponent.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="src\Box2DComponent.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\CharacterControllerComponent.h" />
+    <ClInclude Include="src\CollisionListener.h" />
     <ClInclude Include="src\Component.h" />
     <ClInclude Include="src\ComponentsInclude.h" />
     <ClInclude Include="extras\Dog.h" />
