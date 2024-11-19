@@ -18,5 +18,5 @@ public:
     void update() override;
     void draw() override {};
 
-    b2Body* getBody();
+    b2Body* getBody() const;
 };

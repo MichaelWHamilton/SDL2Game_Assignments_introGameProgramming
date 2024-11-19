@@ -52,39 +52,21 @@ Box2DComponent::~Box2DComponent() {
 }
 
 void Box2DComponent::update() {
-    //auto bbody = getParent().getComponent<BodyComponent>();
-    //if (bbody) {
-    //    const b2Vec2& pos = { (float)bbody->getX(), (float)bbody->getY() };
-    //    // Sync BodyComponent with Box2D body
-    //    //const b2Vec2& pos = body->GetPosition();
-    //    //body->SetPosition(pos.x, pos.y);
-    //    //body->SetAngle(body->GetAngle() * (180.0f / b2_pi)); // Radians to degrees
-    //    std::cout << "Body x: " << bbody->getX() << "Body y:" << bbody->getY();
-    //    std::cout << "Box Body x: " << pos.x << "Box Body y: " << pos.y;
-    //}
-    float timeStep = 1.0f / 60.0f; // 60 FPS
-    int velocityIterations = 8;   // Recommended: 8 velocity iterations
-    int positionIterations = 3;   // Recommended: 3 position iterations
-    Engine::m_world.Step(timeStep, velocityIterations, positionIterations);
-
-    
+        
     auto bodyComp = getParent().getComponent<BodyComponent>();
     auto box2dComp = getParent().getComponent<Box2DComponent>();
 
-    //if (bodyComp && box2dComp) {
-    //    const b2Body* b2Body = box2dComp->getBody();
+    if (bodyComp && box2dComp) {
+        //const b2Body* b2Body = box2dComp->getBody();
+        
 
-    //    // Update the BodyComponent with the new Box2D body position
-    //    bodyComp->setX(b2Body->GetPosition().x);
-    //    bodyComp->setY(b2Body->GetPosition().y);
-
-    //    // Optionally update velocities or other properties
-    //    bodyComp->setVx(b2Body->GetLinearVelocity().x);
-    //    bodyComp->setVy(b2Body->GetLinearVelocity().y);
-    //}
+        // Optionally update velocities or other properties
+        //bodyComp->setVx(b2Body->GetLinearVelocity().x);
+        //bodyComp->setVy(b2Body->GetLinearVelocity().y);
+    }
     
 }
 
-b2Body* Box2DComponent::getBody() {
+b2Body* Box2DComponent::getBody() const{
     return m_body;
 }

@@ -39,7 +39,13 @@ bool Input::isMouseButtonDown(Uint8 button) {
 std::pair<int, int> Input::getMousePosition() {
     return m_mousePosition;
 };
-
+bool Input::keysDown() {
+    if (m_keysDown.empty())
+    {
+        return true;
+    }
+    else return false;
+}
 // Definition of static members
 std::set<SDL_Keycode> Input::m_keysDown;
 std::set<Uint8> Input::m_mouseButtonsDown;
