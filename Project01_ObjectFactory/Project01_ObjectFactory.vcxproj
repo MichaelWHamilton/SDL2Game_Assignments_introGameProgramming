@@ -187,6 +187,7 @@
     <None Include="assets\levelYAML.yaml" />
     <None Include="assets\levelJSON.json" />
     <None Include="assets\ObjectsJSON.json" />
+    <None Include="assets\ObjectsJSON2.json" />
     <None Include="assets\Textures.json" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,8 @@ void MoveUpAndDownComponent::update(){
     m_time += m_speed; // Increment time based on speed
 
     auto body = getParent().getComponent<BodyComponent>();
-    body->getY() += m_amplitude * std::sin(m_time);
+    //TODO UPDATE
+    //body->getY() += m_amplitude * std::sin(m_time);
 }
 
 void MoveUpAndDownComponent::draw(){

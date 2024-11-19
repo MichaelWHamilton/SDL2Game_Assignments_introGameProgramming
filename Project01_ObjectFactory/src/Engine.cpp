@@ -40,7 +40,12 @@ void Engine::update() {
     GameObject* player = Engine::mapGameObjects["triangle"].get();
     //auto p = player->get<BodyComponent>()->xPos;
     
-    camera.setCenter(player->getComponent<BodyComponent>()->getX(), player->getComponent<BodyComponent>()->getY());
+    camera.setCenter(player->getComponent<BodyComponent>()->getBody()->GetPosition().x, player->getComponent<BodyComponent>()->getBody()->GetPosition().x);
+
+    float timeStep = 1.0f / 60.0f;
+    int32 velocityIterations = 6;
+    int32 positionIterations = 2;
+    m_world.Step(timeStep, velocityIterations, positionIterations);
 
     for (auto& gameObject : mapGameObjects) {
         gameObject.second->update();  // Update each GameObject
@@ -107,105 +112,5 @@ int Engine::screenHeight = 600;
 std::vector<std::unique_ptr<GameObject>> Engine::toAdd;
 std::vector<std::unique_ptr<GameObject>> Engine::toDelete;
 Camera Engine::camera(0.0f, 0.0f, 1.0f, 0.0f);
-b2World Engine::m_world(b2Vec2(0.0f, 0.0));
-//constexpr float Engine::scale = 100.0f;
-//std::unordered_map<GameObject*, b2Body*> Engine::m_bodyMap;
-/*-----------------------------INTEGRATE THIS CODE LATER-------------------------*/
-
-//
-////Engine::Engine(const std::string& levelPath) :isRunning(true), objectLibrary(std::make_unique<Library>())
-////{
-////	loadLevel(levelPath);
-////}
-//
-//void Engine::loadLevel(const std::string& levelPath)
-//{
-//	//tinyxml2::XMLDocument xmldoc;
-//	//xmldoc.LoadFile(levelPath.c_str());
-//	//tinyxml2::XMLElement* root = xmldoc.FirstChildElement("Level");	
-//	//for (auto* object = root->FirstChildElement("Object"); object != nullptr; object = object->NextSiblingElement("Object")) {
-//	//	std::string type = object->Attribute("type");
-//	//	//std::unique_ptr<Object> obj = objectLibrary->createObject(type, object);
-//	//	objects.push_back(objectLibrary->createObject(type, object));
-//	//}
-//
-//	//loads based of what file is given/xml/json
-//	if (levelPath.find(".xml") != std::string::npos)
-//	{
-//		loadFromXML(levelPath);
-//	}
-//	else if (levelPath.find(".json") != std::string::npos)
-//	{
-//		loadFromJSON(levelPath);
-//	}
-//	else if (levelPath.find(".yaml") != std::string::npos)
-//	{
-//		loadFromYAML(levelPath);
-//	}
-//	
-//}
-////const std::vector<std::unique_ptr<Object>>& Engine::getObjects() const { return objects; }
-////void Engine::update() {};
-////void Engine::draw() {};
-////bool Engine::run()
-////{
-////	if (!isRunning) return false;
-////	return isRunning;
-////};
-//
-//void Engine::loadFromJSON(const std::string& levelPath)
-//{
-//	std::ifstream file(levelPath);
-//	nlohmann::json data;
-//	file >> data;
-//
-//	for (const auto& object : data["Objects"])
-//	{
-//		std::string type = object["type"].get<std::string>();
-//		//objects.push_back(objectLibrary->createObjectJSON(type, &object));
-//	}
-//}
-//	
-//void Engine::loadFromXML(const std::string& levelPath)
-//{
-//	tinyxml2::XMLDocument xmldoc;
-//	xmldoc.LoadFile(levelPath.c_str());
-//	tinyxml2::XMLElement* root = xmldoc.FirstChildElement("Level");	
-//	for (auto* object = root->FirstChildElement("Object"); object != nullptr; object = object->NextSiblingElement("Object"))
-//	{
-//		std::string type = object->Attribute("type");
-//		//std::unique_ptr<Object> obj = objectLibrary->createObject(type, object);
-//		//objects.push_back(objectLibrary->createObject(type, object));
-//	}
-//}
-//
-//void Engine::loadFromYAML(const std::string& levelPath)
-//{
-//	/*YAML::Node doc;
-//	doc = YAML::LoadFile(levelPath);
-//	
-//	for (const auto& object : doc["Level"])
-//	{
-//		std::string type = object["type"].as<std::string>();
-//		objects.push_back(objectLibrary->createObjectYAML(type, &object));
-//	}*/
-//	YAML::Node yamldoc = YAML::LoadFile(levelPath);
-//
-//	for (const auto& object : yamldoc["Body"]) 
-//	{
-//		std::string type = object["type"].as<std::string>();
-//		//objects.push_back(objectLibrary->createObjectYAML(type, &object));
-//	}
-//}
-//	
-
-
-
-
-/* ---------------NEW CODE------------------- */
-
-
-
-
-
+b2World Engine::m_world(b2Vec2(0.0f, 0.0f));
 

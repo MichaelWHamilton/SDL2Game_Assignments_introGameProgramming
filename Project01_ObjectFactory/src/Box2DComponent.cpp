@@ -25,7 +25,7 @@ Box2DComponent::Box2DComponent(GameObject& parent)
         break;
     }
 
-    bodyDef.position.Set((float)bodyComp->getX(), (float)bodyComp->getY());
+    //bodyDef.position.Set((float)bodyComp->getX(), (float)bodyComp->getY());
     m_body = Engine::m_world.CreateBody(&bodyDef);
 
     // Attach a rectangular fixture
@@ -52,17 +52,14 @@ Box2DComponent::~Box2DComponent() {
 }
 
 void Box2DComponent::update() {
-        
+    
     auto bodyComp = getParent().getComponent<BodyComponent>();
     auto box2dComp = getParent().getComponent<Box2DComponent>();
+    std::cout << "box2d comp update called" << std::endl;
 
+    std::cout << 'x:' << m_body->GetPosition().x << ' y: ' << m_body->GetPosition().y;
     if (bodyComp && box2dComp) {
-        //const b2Body* b2Body = box2dComp->getBody();
         
-
-        // Optionally update velocities or other properties
-        //bodyComp->setVx(b2Body->GetLinearVelocity().x);
-        //bodyComp->setVy(b2Body->GetLinearVelocity().y);
     }
     
 }

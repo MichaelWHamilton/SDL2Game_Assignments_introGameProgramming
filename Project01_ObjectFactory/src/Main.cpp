@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 
     SDL_Renderer* renderer = Engine::getRenderer();
     const std::string jsonTextureFile = "./assets/Textures.json";
-    const std::string jsonObjectsFile = "./assets/ObjectsJSON.json";
+    const std::string jsonObjectsFile = "./assets/ObjectsJSON2.json";
     Textures::loadTextures(jsonTextureFile, renderer);
     GameObjectLoader loadObjects(jsonObjectsFile);
 

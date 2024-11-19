@@ -6,21 +6,23 @@ FollowComponent::FollowComponent(GameObject& parentObj, GameObject* targetObj, d
 
 void FollowComponent::update() {
     if (m_target) {
-        GameObject& parent = getParent();
-        // get target's position
-        double targetX = m_target->getComponent<BodyComponent>()->getX();
-        double targetY = m_target->getComponent<BodyComponent>()->getY();
+        /*TODO UPDATE*/
 
-        double deltaX = targetX - parent.getComponent<BodyComponent>()->getX();
-        double deltaY = targetY - parent.getComponent<BodyComponent>()->getY();
-        double distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+        //GameObject& parent = getParent();
+        //// get target's position
+        //double targetX = m_target->getComponent<BodyComponent>()->getX();
+        //double targetY = m_target->getComponent<BodyComponent>()->getY();
 
-        // Move toward the target if beyond follow distance
-        if (distance > m_followDistance) {
-            double angle = std::atan2(deltaY, deltaX);
-            parent.getComponent<BodyComponent>()->getX() += std::cos(angle) * 5;
-            parent.getComponent<BodyComponent>()->getY() += std::sin(angle) * 5;
-        }
+        //double deltaX = targetX - parent.getComponent<BodyComponent>()->getX();
+        //double deltaY = targetY - parent.getComponent<BodyComponent>()->getY();
+        //double distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        //// Move toward the target if beyond follow distance
+        //if (distance > m_followDistance) {
+        //    double angle = std::atan2(deltaY, deltaX);
+        //    parent.getComponent<BodyComponent>()->getX() += std::cos(angle) * 5;
+        //    parent.getComponent<BodyComponent>()->getY() += std::sin(angle) * 5;
+        //}
     }
 }
 

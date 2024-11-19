@@ -24,7 +24,7 @@ void SpriteComponent::draw() {
     auto body = getParent().getComponent<BodyComponent>();
     if (body) {
         // Define destination rectangle based on the position from the BodyComponent
-        SDL_Rect dst = {static_cast<int>(body->getX()), static_cast<int>(body->getY()), static_cast<int>(body->getWidth()), static_cast<int>(body->getHeight()) };
+        SDL_Rect dst = {static_cast<int>(body->getBody()->GetPosition().x), static_cast<int>(body->getBody()->GetPosition().y), static_cast<int>(body->getWidth()), static_cast<int>(body->getHeight()) };
         
         // Transform the destination rectangle to account for the view (camera) position and scale
         SDL_Rect transformedDst = Engine::camera.transformRect(dst);

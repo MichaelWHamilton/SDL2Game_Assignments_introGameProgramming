@@ -149,6 +149,7 @@
     <None Include="assets\levelYAML.yaml" />
     <None Include="assets\Textures.json" />
     <None Include="assets\ObjectsJSON.json" />
+    <None Include="assets\ObjectsJSON2.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\128x128\Bricks\Bricks_01-128x128.png">
