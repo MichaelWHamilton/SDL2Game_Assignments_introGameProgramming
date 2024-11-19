@@ -3,12 +3,6 @@
 BodyComponent::BodyComponent(GameObject& parent, double x, double y, double width, double height)
     : Component(parent), m_xPos(x), m_yPos(y), m_xVel(0), m_yVel(0), m_width(width), m_height(height), m_body(nullptr) {
 
-    /*auto bodyComp = parent.getComponent<BodyComponent>();
-    if (!bodyComp) {
-        throw std::runtime_error("Box2DComponent requires a BodyComponent in the same GameObject.");
-        exit;
-    }*/
-
     // Create a Box2D body
     b2BodyDef bodyDef;
     /*Box2DBodyType bodyType = box2DDynamic;
