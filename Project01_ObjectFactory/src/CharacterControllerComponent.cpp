@@ -59,13 +59,44 @@
 #include "CharacterControllerComponent.h"
 #include "ComponentsInclude.h"
 CharacterControllerComponent::CharacterControllerComponent(GameObject& parent, float speed)
-    : Component(parent), m_speed(speed) {}
+    : Component(parent), m_speed(speed), m_jumpForce(10.0f) {}
 
 void CharacterControllerComponent::update() {
-    // Fetch the BodyComponent
     auto body = getParent().getComponent<BodyComponent>();
     if (!body) return; // No body component to update
-    
+
+    // get velocity
+    b2Vec2 velocity = body->m_body->GetLinearVelocity();
+
+    // Horizontal movement
+    if (Input::isKeyDown(SDLK_LEFT)) {
+        std::cout << "left key pressed" << std::endl;
+        velocity.x = -m_speed*10;
+    }
+    else if (Input::isKeyDown(SDLK_RIGHT)) {
+        std::cout << "right key pressed" << std::endl;
+        velocity.x = m_speed*10;
+    }
+    else {
+        velocity.x = 0.0f;
+    }
+
+     //Jumping
+    if (Input::isKeyDown(SDLK_SPACE) && isGrounded()) {
+        std::cout << "grounded and pressing space" << std::endl;
+        velocity.y = -m_jumpForce; 
+    }
+
+    body->m_body->SetLinearVelocity(velocity);
 }
 
+bool CharacterControllerComponent::isGrounded() {
+    auto body = getParent().getComponent<BodyComponent>();
+    if (!body) return false; 
+    b2Vec2 velocity = body->m_body->GetLinearVelocity();
+
+    //if (std::abs(velocity.y) < 0.01f) return true;
+    //else return false;
+    return (std::abs(velocity.y) < 0.01f); // No vertical movement means grounded
+}
 void CharacterControllerComponent::draw() {};

@@ -4,8 +4,9 @@
       "type": "triangle",
       "components": {
         "BodyComponent": {
-          "height": 64,
-          "width": 64,
+          "bodytype": 0,
+          "height": 100,
+          "width": 100,
           "x": 100,
           "y": 100
         },
@@ -17,17 +18,130 @@
       }
     },
     {
-      "type": "brick",
+      "type": "brick1",
       "components": {
         "BodyComponent": {
-          "height": 128,
-          "width": 128,
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
           "x": 0,
           "y": 300
         },
         "SpriteComponent": {
           "texture": "brick",
-          "name": "brick"
+          "name": "brick1"
+        }
+      }
+    },
+    {
+      "type": "brick2",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 100,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick2"
+        }
+      }
+    },
+    {
+      "type": "brick3",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 200,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick3"
+        }
+      }
+    },
+    {
+      "type": "brick4",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 300,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick4"
+        }
+      }
+    },
+    {
+      "type": "brick5",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 400,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick5"
+        }
+      }
+    },
+    {
+      "type": "brick6",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 500,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick6"
+        }
+      }
+    },
+    {
+      "type": "brick7",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 600,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick7"
+        }
+      }
+    },
+    {
+      "type": "brick8",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 700,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick8"
         }
       }
     }

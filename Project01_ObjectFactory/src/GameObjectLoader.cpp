@@ -9,6 +9,16 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
         auto gameObject = std::make_unique<GameObject>();
         int width, height;
         std::string texture, name;
+
+        if (obj["components"].contains("BodyComponent")) {
+            int x = obj["components"]["BodyComponent"]["x"];
+            int y = obj["components"]["BodyComponent"]["y"];
+            width = obj["components"]["BodyComponent"]["width"];
+            height = obj["components"]["BodyComponent"]["height"];
+            int bodytype = obj["components"]["BodyComponent"]["bodytype"];
+            gameObject->addComponent<BodyComponent>(x, y, width, height, bodytype);
+        }
+
         if (obj["components"].contains("SpriteComponent")) {
             texture = obj["components"]["SpriteComponent"]["texture"];
             name = obj["components"]["SpriteComponent"]["name"];
@@ -17,13 +27,7 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
             gameObject->addComponent<SpriteComponent>(texture, name);
         }
 
-        if (obj["components"].contains("BodyComponent")) {
-            int x = obj["components"]["BodyComponent"]["x"];
-            int y = obj["components"]["BodyComponent"]["y"];
-            width = obj["components"]["BodyComponent"]["width"];
-            height = obj["components"]["BodyComponent"]["height"];
-            gameObject->addComponent<BodyComponent>(x, y, width, height);
-        }
+        
 
         if (obj["components"].contains("CharacterControllerComponent")) {
             int speed = obj["components"]["CharacterControllerComponent"]["speed"];

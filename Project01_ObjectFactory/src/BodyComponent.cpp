@@ -1,38 +1,40 @@
 #include "BodyComponent.h"
 #include "ComponentsInclude.h"
-BodyComponent::BodyComponent(GameObject& parent, double x, double y, double width, double height)
+BodyComponent::BodyComponent(GameObject& parent, double x, double y, double width, double height, int bodyType)
     : Component(parent), m_width(width), m_height(height), m_body(nullptr) {
 
     // Create a Box2D body
     b2BodyDef bodyDef;
-    /*Box2DBodyType bodyType = box2DDynamic;
+    
     switch (bodyType) {
-    case box2DDynamic:
+    case b2_dynamic:
         bodyDef.type = b2_dynamicBody;
         break;
-    case box2DStatic:
+    case b2_static:
         bodyDef.type = b2_staticBody;
         break;
-    case box2DKinematic:
+    case b2_kinematic:
         bodyDef.type = b2_kinematicBody;
         break;
-    }*/
-    bodyDef.type = b2_dynamicBody;
+    }
+    //bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set((float)x, (float)y);
-    bodyDef.linearDamping = 0.0f; // No resistance
+    
     m_body = Engine::m_world.CreateBody(&bodyDef);
-
+    /*if (bodyDef.type == b2_dynamicBody)
+    {
+        m_body->SetGravityScale(10.0f);
+    }*/
     // Attach a rectangular fixture
     b2PolygonShape boxShape;
-    boxShape.SetAsBox((float)m_width /  2.0f, (float)m_height / 2.0f);//add scale
+    boxShape.SetAsBox((float)m_width /  2.0f, (float)m_height /  2.0f);//add scale
 
     //define fixture
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &boxShape;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.2f;
-    fixtureDef.restitution = 0.0f;
-
+    fixtureDef.friction = 0.3f;
+    
     m_body->GetUserData().pointer = (uintptr_t)this;
     m_body->CreateFixture(&fixtureDef);
 
@@ -70,6 +72,7 @@ void BodyComponent::update() {
 }
 
 void BodyComponent::draw() {
-    // Drawing logic would go here (if needed)
+    // Drawing logic
+
 }
 

@@ -40,7 +40,7 @@ public:
     static int screenWidth;
     static int screenHeight;
     static b2World m_world;
-    static constexpr float scale=100.0f;
+    static constexpr float scale=30.0f;
 private:
     static bool isRunning;                               
     static SDL_Window* window; 

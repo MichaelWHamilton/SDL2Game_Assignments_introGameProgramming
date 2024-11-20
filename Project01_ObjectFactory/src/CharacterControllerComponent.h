@@ -13,8 +13,11 @@ public:
     void update() override;
 
     void draw() override;
+
+    bool isGrounded();
 private:
     float m_speed;
+    float m_jumpForce;
 
-    void move(float dx, float dy);
+    //void move(float dx, float dy);
 };

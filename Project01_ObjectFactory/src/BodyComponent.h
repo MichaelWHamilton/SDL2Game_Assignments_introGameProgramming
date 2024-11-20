@@ -7,7 +7,7 @@ class GameObject;
 class BodyComponent : public Component {
 public:
     
-    BodyComponent(GameObject& parent, double x, double y, double width, double height);
+    BodyComponent(GameObject& parent, double x, double y, double width, double height, int bodyType);
 
     //double& getX();
     //double& getY();
@@ -28,5 +28,6 @@ public:
     b2Body* m_body;
 private:
     double m_width, m_height;// m_xPos, m_yPos, m_xVel, m_yVel;  // Position
+    enum BodyType{b2_dynamic, b2_static, b2_kinematic};
     
 };

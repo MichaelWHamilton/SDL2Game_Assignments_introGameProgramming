@@ -39,8 +39,8 @@ void Engine::handleEvents() {
 void Engine::update() {
     GameObject* player = Engine::mapGameObjects["triangle"].get();
     //auto p = player->get<BodyComponent>()->xPos;
-    
-    camera.setCenter(player->getComponent<BodyComponent>()->getBody()->GetPosition().x, player->getComponent<BodyComponent>()->getBody()->GetPosition().x);
+    auto body = player->getComponent<BodyComponent>()->getBody();
+    camera.setCenter(body->GetPosition().x, body->GetPosition().y);
 
     float timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
@@ -112,5 +112,5 @@ int Engine::screenHeight = 600;
 std::vector<std::unique_ptr<GameObject>> Engine::toAdd;
 std::vector<std::unique_ptr<GameObject>> Engine::toDelete;
 Camera Engine::camera(0.0f, 0.0f, 1.0f, 0.0f);
-b2World Engine::m_world(b2Vec2(0.0f, 0.0f));
+b2World Engine::m_world(b2Vec2(0.0f, 10.0f));
 
