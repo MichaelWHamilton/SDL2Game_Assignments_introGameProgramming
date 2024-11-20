@@ -15,6 +15,10 @@
     {
       "name": "brick",
       "path": ".\\assets\\Bricks_04-128x128.png"
+    },
+    {
+      "name": "brick2",
+      "path": ".\\assets\\Bricks_02-128x128.png"
     }
   ]
 }

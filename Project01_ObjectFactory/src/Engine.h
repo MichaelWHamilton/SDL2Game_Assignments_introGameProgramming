@@ -34,6 +34,8 @@ public:
     // Run the engine (static)
     static void run();
 
+    static void spawnObject();
+
     static Camera camera;
     static SDL_Renderer* getRenderer();
     static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;

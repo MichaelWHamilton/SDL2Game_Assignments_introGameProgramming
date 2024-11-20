@@ -32,12 +32,12 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
             gameObject->addComponent<CharacterControllerComponent>(speed);
         }
 
-        if (obj["components"].contains("FollowComponent")) {
+        /*if (obj["components"].contains("FollowComponent")) {
             std::string targetName = obj["components"]["FollowComponent"]["target"];
             int distance = obj["components"]["FollowComponent"]["distance"];
             GameObject* target = Engine::mapGameObjects[targetName].get();
             gameObject->addComponent<FollowComponent>(target, distance);
-        }
+        }*/
 
         if (obj["components"].contains("MoveUpAndDownComponent")) {
             int range = obj["components"]["MoveUpAndDownComponent"]["range"];
@@ -50,7 +50,7 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
             gameObject->addComponent<Box2DComponent>();
         }*/
 
-        Engine::mapGameObjects.insert({ name, std::move(gameObject) });
-        //Engine::addGameObject(std::move(gameObject));
+        //Engine::mapGameObjects.insert({ name, std::move(gameObject) });
+        Engine::addGameObject(std::move(gameObject));
     }
 }

@@ -37,7 +37,7 @@ void Engine::handleEvents() {
 
 // Update all game objects (static)
 void Engine::update() {
-    GameObject* player = Engine::mapGameObjects["triangle"].get();
+    GameObject* player = Engine::gameObjects[0].get();
     //auto p = player->get<BodyComponent>()->xPos;
     auto body = player->getComponent<BodyComponent>()->getBody();
     camera.setCenter(body->GetPosition().x, body->GetPosition().y);
@@ -47,9 +47,13 @@ void Engine::update() {
     int32 positionIterations = 2;
     m_world.Step(timeStep, velocityIterations, positionIterations);
 
-    for (auto& gameObject : mapGameObjects) {
+    //for (auto& gameObject : mapGameObjects) {
+    //    m_world.Step(timeStep, velocityIterations, positionIterations);
+    //    gameObject.second->update();  // Update each GameObject
+    //}
+    for (auto& gameObject : gameObjects) {
         m_world.Step(timeStep, velocityIterations, positionIterations);
-        gameObject.second->update();  // Update each GameObject
+        gameObject->update();  // Update each GameObject
     }
 };
 
@@ -58,8 +62,11 @@ void Engine::render() {
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
 
-    for (auto& gameObject : mapGameObjects) {
-        gameObject.second->draw();  // Draw each GameObject
+    //for (auto& gameObject : mapGameObjects) {
+    //    gameObject.second->draw();  // Draw each GameObject
+    //}
+    for (auto& gameObject : gameObjects) {
+        gameObject->draw();  // Draw each GameObject
     }
 
     SDL_RenderPresent(renderer);
@@ -101,6 +108,18 @@ void Engine::run() {
 SDL_Renderer* Engine::getRenderer() {
     return renderer;
 };
+
+void Engine::spawnObject() {
+    auto obj = std::make_unique<GameObject>();
+
+    // Add components like BodyComponent and SpriteComponent
+    obj->addComponent<BodyComponent>(60.0f, -100.0f, 100.0f, 100.0f, 0); // Example size: 1x1 meters
+    obj->addComponent<SpriteComponent>("brick2", "spawnable");
+
+    // Add the new game object to the engine
+    gameObjects.push_back(std::move(obj));
+    //mapGameObjects.insert({ "spawnable", std::move(obj) });
+}
 
 float Engine::scale = 100.0f;
 bool Engine::isRunning = false;

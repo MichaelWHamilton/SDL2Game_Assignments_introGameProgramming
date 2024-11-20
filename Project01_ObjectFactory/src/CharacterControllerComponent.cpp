@@ -81,6 +81,11 @@ void CharacterControllerComponent::update() {
         velocity.x = 0.0f;
     }
 
+    if (Input::isKeyDown(SDLK_e)) {
+        std::cout << "********e key pressed***********" << std::endl;
+        Engine::spawnObject();
+    }
+
      //Jumping
     if (Input::isKeyDown(SDLK_SPACE) && isGrounded()) {
         std::cout << "grounded and pressing space" << std::endl;

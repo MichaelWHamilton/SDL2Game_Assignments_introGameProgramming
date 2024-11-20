@@ -18,6 +18,22 @@
       }
     },
     {
+      "type": "square",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": 100,
+          "y": -100
+        },
+        "SpriteComponent": {
+          "texture": "square",
+          "name": "square"
+        }
+      }
+    },
+    {
       "type": "brick1",
       "components": {
         "BodyComponent": {
