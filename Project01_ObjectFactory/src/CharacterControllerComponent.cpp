@@ -66,8 +66,8 @@ void CharacterControllerComponent::update() {
     if (!body) return; // No body component to update
 
     // get velocity
-    b2Vec2 velocity = body->m_body->GetLinearVelocity();
-
+    //b2Vec2 velocity = body->m_body->GetLinearVelocity();
+    b2Vec2 velocity(0.0f, body->m_body->GetLinearVelocity().y);
     // Horizontal movement
     if (Input::isKeyDown(SDLK_LEFT)) {
         std::cout << "left key pressed" << std::endl;

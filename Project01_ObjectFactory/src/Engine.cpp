@@ -43,7 +43,7 @@ void Engine::update() {
     camera.setCenter(body->GetPosition().x, body->GetPosition().y);
 
     float timeStep = 1.0f / 60.0f;
-    int32 velocityIterations = 6;
+    int32 velocityIterations = 8;
     int32 positionIterations = 2;
     m_world.Step(timeStep, velocityIterations, positionIterations);
 
@@ -101,7 +101,7 @@ SDL_Renderer* Engine::getRenderer() {
     return renderer;
 };
 
-
+float Engine::scale = 100.0f;
 bool Engine::isRunning = false;
 SDL_Window* Engine::window = nullptr;
 SDL_Renderer* Engine::renderer = nullptr;

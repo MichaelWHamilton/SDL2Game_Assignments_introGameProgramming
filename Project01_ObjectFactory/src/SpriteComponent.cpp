@@ -24,10 +24,20 @@ void SpriteComponent::draw() {
     auto body = getParent().getComponent<BodyComponent>();
     if (body) {
         // Define destination rectangle based on the position from the BodyComponent
-        SDL_Rect dst = {static_cast<int>(body->getBody()->GetPosition().x), static_cast<int>(body->getBody()->GetPosition().y), static_cast<int>(body->getWidth()), static_cast<int>(body->getHeight()) };
+        //SDL_Rect dst = {static_cast<int>(body->getBody()->GetPosition().x), static_cast<int>(body->getBody()->GetPosition().y), static_cast<int>(body->getWidth()), static_cast<int>(body->getHeight()) };
+        int x = static_cast<int>(body->getBody()->GetPosition().x );
+        int y = static_cast<int>(body->getBody()->GetPosition().y );
+
+        // Define SDL rectangle (in pixels)
+        SDL_Rect rect;
+        rect.x = x - static_cast<int>(body->m_width / 2);
+        rect.y = y - static_cast<int>(body->m_height / 2);
+        rect.w = static_cast<int>(body->m_width );
+        rect.h = static_cast<int>(body->m_height );
+
         
         // Transform the destination rectangle to account for the view (camera) position and scale
-        SDL_Rect transformedDst = Engine::camera.transformRect(dst);
+        SDL_Rect transformedDst = Engine::camera.transformRect(rect);
 
         // Render the texture using the transformed rectangle
         SDL_RenderCopy(Engine::getRenderer(), m_texture, nullptr, &transformedDst);

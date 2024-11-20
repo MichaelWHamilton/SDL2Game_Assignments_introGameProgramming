@@ -26,8 +26,9 @@ public:
 
     void draw() override;
     b2Body* m_body;
-private:
     double m_width, m_height;// m_xPos, m_yPos, m_xVel, m_yVel;  // Position
-    enum BodyType{b2_dynamic, b2_static, b2_kinematic};
+private:
     
+    enum BodyType{b2_dynamic, b2_static, b2_kinematic};
+    //SDL_Rect rect;
 };

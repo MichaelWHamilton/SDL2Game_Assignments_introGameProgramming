@@ -27,8 +27,6 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
             gameObject->addComponent<SpriteComponent>(texture, name);
         }
 
-        
-
         if (obj["components"].contains("CharacterControllerComponent")) {
             int speed = obj["components"]["CharacterControllerComponent"]["speed"];
             gameObject->addComponent<CharacterControllerComponent>(speed);
