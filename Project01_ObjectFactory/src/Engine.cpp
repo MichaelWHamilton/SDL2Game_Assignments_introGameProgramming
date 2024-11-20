@@ -48,6 +48,7 @@ void Engine::update() {
     m_world.Step(timeStep, velocityIterations, positionIterations);
 
     for (auto& gameObject : mapGameObjects) {
+        m_world.Step(timeStep, velocityIterations, positionIterations);
         gameObject.second->update();  // Update each GameObject
     }
 };

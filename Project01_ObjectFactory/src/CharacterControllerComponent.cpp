@@ -59,7 +59,7 @@
 #include "CharacterControllerComponent.h"
 #include "ComponentsInclude.h"
 CharacterControllerComponent::CharacterControllerComponent(GameObject& parent, float speed)
-    : Component(parent), m_speed(speed), m_jumpForce(10.0f) {}
+    : Component(parent), m_speed(speed), m_jumpForce(50.0f) {}
 
 void CharacterControllerComponent::update() {
     auto body = getParent().getComponent<BodyComponent>();
