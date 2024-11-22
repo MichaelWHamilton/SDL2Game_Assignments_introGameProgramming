@@ -15,7 +15,7 @@ public:
     static bool init(const char* title, int width, int height);
 
     // Handle events (static)
-    static void handleEvents();
+    static void handleInput();
 
     // Update all game objects (static)
     static void update();
@@ -43,9 +43,9 @@ public:
     static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;
     static int screenWidth;
     static int screenHeight;
-    static b2World m_world;
+    static b2World* m_world;
     static float scale;
-    
+    static GameObject* player;
 private:
     static bool isRunning;                               
     static SDL_Window* window; 

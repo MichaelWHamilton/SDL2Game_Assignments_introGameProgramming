@@ -26,7 +26,7 @@ Box2DComponent::Box2DComponent(GameObject& parent)
     }
 
     //bodyDef.position.Set((float)bodyComp->getX(), (float)bodyComp->getY());
-    m_body = Engine::m_world.CreateBody(&bodyDef);
+    m_body = Engine::m_world->CreateBody(&bodyDef);
 
     // Attach a rectangular fixture
     b2PolygonShape boxShape;
@@ -47,7 +47,7 @@ Box2DComponent::Box2DComponent(GameObject& parent)
 
 Box2DComponent::~Box2DComponent() {
     if (m_body) {
-        Engine::m_world.DestroyBody(m_body);
+        Engine::m_world->DestroyBody(m_body);
     }
 }
 

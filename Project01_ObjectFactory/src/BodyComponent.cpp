@@ -32,7 +32,7 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
     bodyDef.position.Set((float)x , (float)y * 1.0f );
     bodyDef.linearDamping = 0.0f;
     bodyDef.angularDamping = 0.0f;
-    m_body = Engine::m_world.CreateBody(&bodyDef);
+    m_body = Engine::m_world->CreateBody(&bodyDef);
     if (bodyDef.type == b2_dynamicBody)
     {
         //m_body->SetLinearVelocity(b2Vec2(0.0f,10.0f));

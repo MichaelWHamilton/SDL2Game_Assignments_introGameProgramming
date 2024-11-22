@@ -21,39 +21,50 @@ bool Engine::init(const char* title, int width, int height) {
     }
     Engine::gameObjects.reserve(1000);
     
+    b2Vec2 gravity(0.0f, 0.0f);
+    m_world = new b2World(gravity);
+
     isRunning = true;
     return true;
 };
 
 // Handle events (static)
-void Engine::handleEvents() {
+
+//TODO INPUT IS NOT COMPLETELY RIGHT
+void Engine::handleInput() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
             isRunning = false;
         }
-        Input::processEvent(event);  // Call static Input method
+        else if (event.type == SDL_KEYDOWN) {
+            Input::m_keysDown.insert(event.key.keysym.sym);
+        }
+        else if (event.type == SDL_KEYUP) {
+            Input::m_keysDown.erase(event.key.keysym.sym);
+        }
     }
+    // Call static Input method
 };
 
 // Update all game objects (static)
 void Engine::update() {
-    GameObject* player = Engine::gameObjects.back().get();
-    //auto p = player->get<BodyComponent>()->xPos;
     auto body = player->getComponent<BodyComponent>()->getBody();
     camera.setCenter(body->GetPosition().x, body->GetPosition().y);
+    handleInput();
+    //auto p = player->get<BodyComponent>()->xPos;
 
     float timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 8;
     int32 positionIterations = 2;
-    //m_world.Step(timeStep, velocityIterations, positionIterations);
+    m_world->Step(timeStep, velocityIterations, positionIterations);
 
     //for (auto& gameObject : mapGameObjects) {
     //m_world.Step(timeStep, velocityIterations, positionIterations);
     //    gameObject.second->update();  // Update each GameObject
     //}
     for (auto& gameObject : gameObjects) {
-        m_world.Step(timeStep, velocityIterations, positionIterations);
+        //m_world->Step(timeStep, velocityIterations, positionIterations);
         gameObject->update();  // Update each GameObject
     }
 };
@@ -98,13 +109,12 @@ void Engine::addGameObject(std::unique_ptr<GameObject> gameObject) {
 void Engine::run() {
     createWorld();
     loadPlayer();
+    player = gameObjects.back().get();
     while (isRunning) {
-        handleEvents();
         update();
         render();
-        SDL_Delay(16);
+        //SDL_Delay(16);
     }
-
     clean();
 };
 void Engine::loadPlayer() {
@@ -113,7 +123,7 @@ void Engine::loadPlayer() {
 }
 void Engine::createWorld() {
     auto obj = std::make_unique<GameObject>();
-    int startX = 10, startY = 10, rows = 10, cols = 10, tileWidth = 64, tileHeight = 64;
+    int startX = 100, startY = 100, rows = 1, cols = 1, tileWidth = 640, tileHeight = 640;
     for (int y = 0; y < rows; ++y) {
         for (int x = 0; x < cols; ++x) {
             // Calculate tile position
@@ -153,7 +163,7 @@ void Engine::spawnObject() {
     
     //mapGameObjects.insert({ "spawnable", std::move(obj) });
 }
-
+GameObject* Engine::player = nullptr;
 float Engine::scale = 100.0f;
 bool Engine::isRunning = false;
 SDL_Window* Engine::window = nullptr;
@@ -165,5 +175,5 @@ int Engine::screenHeight = 600;
 std::vector<std::unique_ptr<GameObject>> Engine::toAdd;
 std::vector<std::unique_ptr<GameObject>> Engine::toDelete;
 Camera Engine::camera(0.0f, 0.0f, 1.0f, 0.0f);
-b2World Engine::m_world(b2Vec2(0.0f, 0.0f));
+b2World* Engine::m_world=nullptr;
 

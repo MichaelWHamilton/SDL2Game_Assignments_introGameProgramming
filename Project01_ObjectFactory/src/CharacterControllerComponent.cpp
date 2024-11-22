@@ -97,29 +97,43 @@ void CharacterControllerComponent::update() {
 
     /*  Switching to top down game view, new movement including up down*/
 
-    auto body = getParent().getComponent<BodyComponent>();
+    auto body = getParent().getComponent<BodyComponent>()->getBody();
     if (!body) return;
 
     b2Vec2 velocity(0.0f, 0.0f);
 
     // Horizontal movement
     if (Input::isKeyDown(SDLK_LEFT) || Input::isKeyDown(SDLK_a)) {
-        velocity.x = -m_speed; // Move left
+        //velocity.x = -m_speed; // Move left
+       // body->m_body->SetLinearVelocity(velocity);
+
+        float velocityX = -m_speed / Engine::scale *10;
+        float velocityY = m_speed / Engine::scale ;
+        body->SetLinearVelocity(b2Vec2(velocityX, 0.0f));
     }
-    if (Input::isKeyDown(SDLK_RIGHT) || Input::isKeyDown(SDLK_d)) {
+    else if (Input::isKeyDown(SDLK_RIGHT) || Input::isKeyDown(SDLK_d)) {
         velocity.x = m_speed; // Move right
+        float velocityX = m_speed / Engine::scale * 10;
+        float velocityY = m_speed / Engine::scale ;
+        body->SetLinearVelocity(b2Vec2(velocityX, 0.0f));
     }
 
     // Vertical movement
-    if (Input::isKeyDown(SDLK_UP) || Input::isKeyDown(SDLK_w)) {
+    else if (Input::isKeyDown(SDLK_UP) || Input::isKeyDown(SDLK_w)) {
         velocity.y = -m_speed; // Move up
+        float velocityX = m_speed / Engine::scale ;
+        float velocityY = -m_speed / Engine::scale * 10;
+        body->SetLinearVelocity(b2Vec2(0.0f, velocityY));
     }
-    if (Input::isKeyDown(SDLK_DOWN) || Input::isKeyDown(SDLK_s)) {
+    else if (Input::isKeyDown(SDLK_DOWN) || Input::isKeyDown(SDLK_s)) {
         velocity.y = m_speed; // Move down
+        float velocityX = m_speed / Engine::scale ;
+        float velocityY = m_speed / Engine::scale * 10;
+        body->SetLinearVelocity(b2Vec2(0.0f, velocityY));
     }
-
+    else body->SetLinearVelocity(b2Vec2(0.0f,0.0f));
     // Set the body's linear velocity
-    body->m_body->SetLinearVelocity(velocity);
+    //body->m_body->SetLinearVelocity(velocity);
 
     //b2Vec2 position = body->m_body->GetPosition();
 
