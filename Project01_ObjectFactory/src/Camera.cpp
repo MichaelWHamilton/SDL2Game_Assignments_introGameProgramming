@@ -24,8 +24,8 @@ SDL_Rect Camera::transformRect(const SDL_Rect& rect) const {
 	transformed.y = static_cast<int>((rect.y - centerY) * scale);
 	transformed.w = static_cast<int>(rect.w * scale);
 	transformed.h = static_cast<int>(rect.h * scale);*/
-	int h = 600;
-	int w = 800;
+	int h = 720;
+	int w = 1280;
 	// Translate the position to keep player at the center of the screen
 	transformed.x = static_cast<int>((rect.x - m_centerX)  + w / 2);
 	transformed.y = static_cast<int>((rect.y - m_centerY)  + h / 2);

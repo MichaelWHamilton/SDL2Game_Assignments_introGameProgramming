@@ -1,0 +1,21 @@
+{
+  "Objects": [
+    {
+      "type": "player",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 0,
+          "height": 32,
+          "width": 32,
+          "x": 40,
+          "y": 40
+        },
+        "CharacterControllerComponent": { "speed": 10 },
+        "SpriteComponent": {
+          "texture": "hero_basic",
+          "name": "player"
+        }
+      }
+    }
+  ]
+}

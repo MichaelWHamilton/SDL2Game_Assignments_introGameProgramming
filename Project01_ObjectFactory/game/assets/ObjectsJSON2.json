@@ -34,6 +34,54 @@
       }
     },
     {
+      "type": "brick02",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": -300,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick1"
+        }
+      }
+    },
+    {
+      "type": "brick01",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": -200,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick1"
+        }
+      }
+    },
+    {
+      "type": "brick0",
+      "components": {
+        "BodyComponent": {
+          "bodytype": 1,
+          "height": 100,
+          "width": 100,
+          "x": -100,
+          "y": 300
+        },
+        "SpriteComponent": {
+          "texture": "brick",
+          "name": "brick1"
+        }
+      }
+    },
+    {
       "type": "brick1",
       "components": {
         "BodyComponent": {

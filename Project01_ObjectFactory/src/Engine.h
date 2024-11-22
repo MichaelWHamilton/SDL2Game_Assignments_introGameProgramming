@@ -36,6 +36,8 @@ public:
 
     static void spawnObject();
 
+    static void createWorld();
+    static void loadPlayer();
     static Camera camera;
     static SDL_Renderer* getRenderer();
     static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;
@@ -43,6 +45,7 @@ public:
     static int screenHeight;
     static b2World m_world;
     static float scale;
+    
 private:
     static bool isRunning;                               
     static SDL_Window* window; 

@@ -189,10 +189,12 @@
     <None Include="assets\ObjectsJSON.json" />
     <None Include="assets\ObjectsJSON2.json" />
     <None Include="assets\Textures.json" />
+    <None Include="assets\World.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\128x128\Bricks\Bricks_01-128x128.png" />
     <Image Include="..\..\..\..\Desktop\128x128\Bricks\Bricks_02-128x128.png" />
+    <Image Include="extras\0x72_16x16DungeonTileset.v5\0x72_16x16DungeonTileset.v5\items\floor_plain.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

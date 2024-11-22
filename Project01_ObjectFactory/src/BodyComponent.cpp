@@ -35,7 +35,7 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
     m_body = Engine::m_world.CreateBody(&bodyDef);
     if (bodyDef.type == b2_dynamicBody)
     {
-        m_body->SetLinearVelocity(b2Vec2(0.0f,10.0f));
+        //m_body->SetLinearVelocity(b2Vec2(0.0f,10.0f));
     }
     // Attach a rectangular fixture
     b2PolygonShape boxShape;
@@ -46,6 +46,10 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
     fixtureDef.shape = &boxShape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    //std::cout << parent.getComponent<SpriteComponent>()->getName();
+    
+        fixtureDef.filter.maskBits = 0x0000;
+    
     
     m_body->GetUserData().pointer = (uintptr_t)this;
     m_body->CreateFixture(&fixtureDef);

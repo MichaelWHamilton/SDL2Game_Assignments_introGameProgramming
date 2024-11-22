@@ -19,7 +19,8 @@ bool Engine::init(const char* title, int width, int height) {
         SDL_Log("Failed to create renderer: %s", SDL_GetError());
         return false;
     }
-
+    Engine::gameObjects.reserve(1000);
+    
     isRunning = true;
     return true;
 };
@@ -37,7 +38,7 @@ void Engine::handleEvents() {
 
 // Update all game objects (static)
 void Engine::update() {
-    GameObject* player = Engine::gameObjects[0].get();
+    GameObject* player = Engine::gameObjects.back().get();
     //auto p = player->get<BodyComponent>()->xPos;
     auto body = player->getComponent<BodyComponent>()->getBody();
     camera.setCenter(body->GetPosition().x, body->GetPosition().y);
@@ -45,10 +46,10 @@ void Engine::update() {
     float timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 8;
     int32 positionIterations = 2;
-    m_world.Step(timeStep, velocityIterations, positionIterations);
+    //m_world.Step(timeStep, velocityIterations, positionIterations);
 
     //for (auto& gameObject : mapGameObjects) {
-    //    m_world.Step(timeStep, velocityIterations, positionIterations);
+    //m_world.Step(timeStep, velocityIterations, positionIterations);
     //    gameObject.second->update();  // Update each GameObject
     //}
     for (auto& gameObject : gameObjects) {
@@ -95,6 +96,8 @@ void Engine::addGameObject(std::unique_ptr<GameObject> gameObject) {
 
 // Run the engine (static)
 void Engine::run() {
+    createWorld();
+    loadPlayer();
     while (isRunning) {
         handleEvents();
         update();
@@ -104,6 +107,35 @@ void Engine::run() {
 
     clean();
 };
+void Engine::loadPlayer() {
+    const std::string jsonObjectsFile = "./assets/World.json";
+    GameObjectLoader loadObjects(jsonObjectsFile);
+}
+void Engine::createWorld() {
+    auto obj = std::make_unique<GameObject>();
+    int startX = 10, startY = 10, rows = 10, cols = 10, tileWidth = 64, tileHeight = 64;
+    for (int y = 0; y < rows; ++y) {
+        for (int x = 0; x < cols; ++x) {
+            // Calculate tile position
+            float tileX = startX + x * tileWidth;
+            float tileY = startY + y * tileHeight;
+
+            // Create a new game object for each tile
+            auto floorTile = std::make_unique<GameObject>();
+
+            // Add a BodyComponent for the floor tile
+            floorTile->addComponent<BodyComponent>(tileX, tileY, tileWidth, tileHeight, 1);
+
+            // Add a SpriteComponent to render the floor tile
+            floorTile->addComponent<SpriteComponent>("floor_plain", "floor_plain");
+
+            // Add the floor tile to the engine
+            
+            gameObjects.push_back(std::move(floorTile));
+        }
+    }
+
+}
 
 SDL_Renderer* Engine::getRenderer() {
     return renderer;
@@ -111,13 +143,14 @@ SDL_Renderer* Engine::getRenderer() {
 
 void Engine::spawnObject() {
     auto obj = std::make_unique<GameObject>();
-
+    
     // Add components like BodyComponent and SpriteComponent
     obj->addComponent<BodyComponent>(60.0f, -100.0f, 100.0f, 100.0f, 0); // Example size: 1x1 meters
     obj->addComponent<SpriteComponent>("brick2", "spawnable");
 
     // Add the new game object to the engine
     gameObjects.push_back(std::move(obj));
+    
     //mapGameObjects.insert({ "spawnable", std::move(obj) });
 }
 
@@ -132,5 +165,5 @@ int Engine::screenHeight = 600;
 std::vector<std::unique_ptr<GameObject>> Engine::toAdd;
 std::vector<std::unique_ptr<GameObject>> Engine::toDelete;
 Camera Engine::camera(0.0f, 0.0f, 1.0f, 0.0f);
-b2World Engine::m_world(b2Vec2(0.0f, 10.0f));
+b2World Engine::m_world(b2Vec2(0.0f, 0.0f));
 

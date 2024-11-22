@@ -21,4 +21,6 @@ private:
     SDL_Texture* m_texture;
     std::string m_name;
 
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
+
 };

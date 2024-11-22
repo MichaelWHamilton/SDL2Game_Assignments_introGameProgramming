@@ -62,37 +62,86 @@ CharacterControllerComponent::CharacterControllerComponent(GameObject& parent, f
     : Component(parent), m_speed(speed), m_jumpForce(50.0f) {}
 
 void CharacterControllerComponent::update() {
+    //auto body = getParent().getComponent<BodyComponent>();
+    //if (!body) return; // No body component to update
+
+    //// get velocity
+    ////b2Vec2 velocity = body->m_body->GetLinearVelocity();
+    //b2Vec2 velocity(0.0f, body->m_body->GetLinearVelocity().y);
+    //// Horizontal movement
+    //if (Input::isKeyDown(SDLK_LEFT)) {
+    //    std::cout << "left key pressed" << std::endl;
+    //    velocity.x = -m_speed*10;
+    //}
+    //else if (Input::isKeyDown(SDLK_RIGHT)) {
+    //    std::cout << "right key pressed" << std::endl;
+    //    velocity.x = m_speed*10;
+    //}
+    //else {
+    //    velocity.x = 0.0f;
+    //}
+
+    //if (Input::isKeyDown(SDLK_e)) {
+    //    std::cout << "********e key pressed***********" << std::endl;
+    //    Engine::spawnObject();
+    //}
+
+    // //Jumping
+    //if (Input::isKeyDown(SDLK_SPACE) && isGrounded()) {
+    //    std::cout << "grounded and pressing space" << std::endl;
+    //    velocity.y = -m_jumpForce; 
+    //}
+
+    //body->m_body->SetLinearVelocity(velocity);
+
+
+    /*  Switching to top down game view, new movement including up down*/
+
     auto body = getParent().getComponent<BodyComponent>();
-    if (!body) return; // No body component to update
+    if (!body) return;
 
-    // get velocity
-    //b2Vec2 velocity = body->m_body->GetLinearVelocity();
-    b2Vec2 velocity(0.0f, body->m_body->GetLinearVelocity().y);
+    b2Vec2 velocity(0.0f, 0.0f);
+
     // Horizontal movement
-    if (Input::isKeyDown(SDLK_LEFT)) {
-        std::cout << "left key pressed" << std::endl;
-        velocity.x = -m_speed*10;
+    if (Input::isKeyDown(SDLK_LEFT) || Input::isKeyDown(SDLK_a)) {
+        velocity.x = -m_speed; // Move left
     }
-    else if (Input::isKeyDown(SDLK_RIGHT)) {
-        std::cout << "right key pressed" << std::endl;
-        velocity.x = m_speed*10;
-    }
-    else {
-        velocity.x = 0.0f;
+    if (Input::isKeyDown(SDLK_RIGHT) || Input::isKeyDown(SDLK_d)) {
+        velocity.x = m_speed; // Move right
     }
 
-    if (Input::isKeyDown(SDLK_e)) {
-        std::cout << "********e key pressed***********" << std::endl;
-        Engine::spawnObject();
+    // Vertical movement
+    if (Input::isKeyDown(SDLK_UP) || Input::isKeyDown(SDLK_w)) {
+        velocity.y = -m_speed; // Move up
+    }
+    if (Input::isKeyDown(SDLK_DOWN) || Input::isKeyDown(SDLK_s)) {
+        velocity.y = m_speed; // Move down
     }
 
-     //Jumping
-    if (Input::isKeyDown(SDLK_SPACE) && isGrounded()) {
-        std::cout << "grounded and pressing space" << std::endl;
-        velocity.y = -m_jumpForce; 
-    }
-
+    // Set the body's linear velocity
     body->m_body->SetLinearVelocity(velocity);
+
+    //b2Vec2 position = body->m_body->GetPosition();
+
+    //// Update only the horizontal position (X) based on user input
+    //if (Input::isKeyDown(SDLK_LEFT)) {
+    //    position.x -= m_speed; // Move left
+    //}
+    //else if (Input::isKeyDown(SDLK_RIGHT)) {
+    //    position.x += m_speed; // Move right
+    //}
+
+    //// Update only the vertical position (Y) based on user input
+    //if (Input::isKeyDown(SDLK_UP)) {
+    //    position.y -= m_speed; // Move up
+    //}
+    //else if (Input::isKeyDown(SDLK_DOWN)) {
+    //    position.y += m_speed; // Move down
+    //}
+
+    //// Set the new position directly
+    //body->m_body->SetTransform(position, body->m_body->GetAngle());
+
 }
 
 bool CharacterControllerComponent::isGrounded() {
