@@ -447,7 +447,7 @@ void Engine::loadMusic() {
         return;
     }
 
-    Mix_FadeInMusic(m_gameMusic, -1, 4000);
+    Mix_FadeInMusic(m_gameMusic, -1, 5000);
     Mix_VolumeMusic(30);
 }
 
