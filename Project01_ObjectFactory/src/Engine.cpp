@@ -363,7 +363,7 @@ void Engine::createWorld() {
     boxBotX = 1850; //560 620
     boxBotY = 620;
     auto boxBot2 = std::make_unique<GameObject>();
-    boxBot2->addComponent<BodyComponent>(boxBotX, boxBotY, 100, 100, 0);
+    boxBot2->addComponent<BodyComponent>(boxBotX, boxBotY, 50, 50, 0);
     boxBot2->addComponent<SpriteComponent>("wall1", "box2");
     gameObjects.push_back(std::move(boxBot2));
 
