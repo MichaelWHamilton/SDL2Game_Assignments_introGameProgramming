@@ -31,6 +31,10 @@
     {
       "name": "wall1",
       "path": ".\\assets\\wall1.png"
+    },
+    {
+      "name": "enemy",
+      "path": ".\\assets\\enemy.png"
     }
   ]
 }

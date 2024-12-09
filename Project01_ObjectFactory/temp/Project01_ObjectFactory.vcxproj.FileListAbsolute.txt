@@ -2,11 +2,11 @@ C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\SDL2_imaged.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\libpng16d.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\zlibd1.dll
-C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\tinyxml2.dll
-C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\yaml-cppd.dll
-C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\temp\Project01_ObjectFactory.vcxproj.CopyComplete
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\SDL2_mixerd.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\vorbisfile.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\vorbis.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\ogg.dll
 C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\wavpackdll.dll
+C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\tinyxml2.dll
+C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\game\yaml-cppd.dll
+C:\Users\mikey\OneDrive\Documents\IntroToGameProgramming\Project01_ObjectFactory\Project01_ObjectFactory\temp\Project01_ObjectFactory.vcxproj.CopyComplete

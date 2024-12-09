@@ -10,7 +10,7 @@
           "x": 40,
           "y": 40
         },
-        "CharacterControllerComponent": { "speed": 1000 },
+        "CharacterControllerComponent": { "speed": 1000},
         "SpriteComponent": {
           "texture": "hero_basic",
           "name": "player"

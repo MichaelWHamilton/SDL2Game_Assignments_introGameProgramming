@@ -38,9 +38,7 @@ bool Engine::init(const char* title, int width, int height) {
     return true;
 };
 
-// Handle events (static)
 
-//TODO INPUT IS NOT COMPLETELY RIGHT
 void Engine::handleInput() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -54,53 +52,33 @@ void Engine::handleInput() {
             Input::m_keysDown.erase(event.key.keysym.sym);
         }
     }
-    // Call static Input method
 };
 
-// Update all game objects (static)
+// Update all game objects
 void Engine::update() {
     auto body = player->getComponent<BodyComponent>()->getBody();
     camera.setCenter(body->GetPosition().x, body->GetPosition().y);
     handleInput();
     grabObjects();
-    //auto p = player->get<BodyComponent>()->xPos;
 
     float timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
     int32 positionIterations = 2;
     m_world->Step(timeStep, velocityIterations, positionIterations);
 
-    //for (auto& gameObject : mapGameObjects) {
-    //m_world.Step(timeStep, velocityIterations, positionIterations);
-    //    gameObject.second->update();  // Update each GameObject
-    //}
     for (auto& gameObject : gameObjects) {
-        //m_world->Step(timeStep, velocityIterations, positionIterations);
+        
         gameObject->update();  // Update each GameObject
     }
 };
 
-// Render all game objects (static)
 void Engine::render() {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
     SDL_RenderClear(renderer);
 
-    //for (auto& gameObject : mapGameObjects) {
-    //    gameObject.second->draw();  // Draw each GameObject
-    //}
     for (auto& gameObject : gameObjects) {
         gameObject->draw();  // Draw each GameObject
     }
-
-    //SDL_Rect topWall = { 0 - camera.getCenterX(), 0-camera.getCenterY(), screenWidth, tileSize};
-    //SDL_Rect bottomWall = { 0, screenHeight - TILE_SIZE, screenWidth, TILE_SIZE };
-    //SDL_Rect leftWall = { 0, 0, TILE_SIZE, screenHeight };
-    //SDL_Rect rightWall = { screenWidth - TILE_SIZE, 0, TILE_SIZE, screenHeight };
-   // SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    //SDL_RenderFillRect(renderer, &topWall);
-    //SDL_RenderFillRect(renderer, &bottomWall);
-    //SDL_RenderFillRect(renderer, &leftWall);
-    //SDL_RenderFillRect(renderer, &rightWall);
 
     SDL_RenderPresent(renderer);
 };
@@ -139,33 +117,21 @@ void Engine::grabObjects() {
                     // If the body is a dynamic box, perform any desired action
                     std::cout << "Found a body: " << fixture->GetBody()->GetType() << std::endl;
 
-                    //if (fixture->GetBody()->GetType() == b2_dynamicBody) {
-                    //    b2Vec2 newPosition(10.0f, 10.0f); // Example position
-                    //    fixture->GetBody()->SetTransform(newPosition, fixture->GetBody()->GetAngle());
-                    //}
-
                     if (fixture->GetBody()->GetType() == b2_dynamicBody) {
                         b2RevoluteJointDef jointDef;
                         jointDef.bodyA = m_playerBody; // The player's body
                         jointDef.bodyB = fixture->GetBody(); // The found dynamic body
-                        jointDef.localAnchorA.Set(100.0f, 0.0f); // Anchor point on the player's body
+                        jointDef.localAnchorA.Set(110.0f, 0.0f); // Anchor point on the player's body
                         jointDef.localAnchorB.Set(0.0f, 0.0f); // Anchor point on the found body
                         jointDef.collideConnected = false; // Whether to allow collisions between bodies
                         jointDef.enableLimit = true;
-                        jointDef.lowerAngle = 0.0f; // Lower angle limit
-                        jointDef.upperAngle = 0.0f; // Upper angle limit
+                        
 
-                        jointDef.enableMotor = false; // Enable motor for control
-                        //jointDef.motorSpeed = 0.0f; // Set motor speed to 0 for no movement
-                        //jointDef.maxMotorTorque = 1000.0f; // Adjust this to set the resistance level
-
-                        // Create the joint
+                        jointDef.enableMotor = false; 
+                        
                         Engine::joint = Engine::m_world->CreateJoint(&jointDef);
                     }
-                    // You can add logic here to check the fixture's properties
-                    // For example, check if it is a dynamic body or specific type you want to interact with
                 }
-
                 return true; // Continue checking other fixtures
             }
         };
@@ -192,7 +158,6 @@ void Engine::addGameObject(std::unique_ptr<GameObject> gameObject) {
     gameObjects.push_back(std::move(gameObject));  // Add the game object to the list
 };
 
-// Run the engine (static)
 void Engine::run() {
     createWorld();
     loadPlayer();
@@ -201,7 +166,6 @@ void Engine::run() {
     while (isRunning) {
         update();
         render();
-        //SDL_Delay(16);
     }
     clean();
 };
@@ -306,6 +270,19 @@ void Engine::createWorld() {
     bottomWall3->addComponent<SpriteComponent>("wall1", "wallBot3");
     gameObjects.push_back(std::move(bottomWall3));
 
+    auto topWall4 = std::make_unique<GameObject>();
+    topWall4->addComponent<BodyComponent>(topWallX + roomWidth * 3, topWallY, roomWidth, wallThickness, 1);
+    topWall4->addComponent<SpriteComponent>("wall1", "wallTop3");
+    gameObjects.push_back(std::move(topWall4));
+
+    // Bottom wall2
+    //float bottomWallX = 0;
+    //float bottomWallY = roomHeight - wallThickness;
+    auto bottomWall4 = std::make_unique<GameObject>();
+    bottomWall4->addComponent<BodyComponent>(bottomWallX + roomWidth * 3, bottomWallY, roomWidth, wallThickness, 1);
+    bottomWall4->addComponent<SpriteComponent>("wall1", "wallBot3");
+    gameObjects.push_back(std::move(bottomWall4));
+
     // Left wall
     float leftWallX = -630;
     float leftWallY = 343;
@@ -335,29 +312,40 @@ void Engine::createWorld() {
     rightWall3->addComponent<SpriteComponent>("wall1", "wall4");
     gameObjects.push_back(std::move(rightWall3));
 
+    auto rightWall4 = std::make_unique<GameObject>();
+    rightWall4->addComponent<BodyComponent>(rightWallX + roomWidth*2, rightWallY, wallThickness, roomHeight - 200, 1);
+    rightWall4->addComponent<SpriteComponent>("wall1", "wall4");
+    gameObjects.push_back(std::move(rightWall4));
+
+    auto rightWall5 = std::make_unique<GameObject>();
+    rightWall5->addComponent<BodyComponent>(rightWallX + roomWidth * 2+140.0f, rightWallY, wallThickness, roomHeight - 200, 1);
+    rightWall5->addComponent<SpriteComponent>("wall1", "wall4");
+    gameObjects.push_back(std::move(rightWall5));
+
     //float boxW = 100;
     //float boxH = 100;
+    //1st top box
     float boxTopX = 560; //560 620
     float boxTopY = 67;
     auto boxTop = std::make_unique<GameObject>();
     boxTop->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
     boxTop->addComponent<SpriteComponent>("wall1", "box1");
     gameObjects.push_back(std::move(boxTop));
-
+    //1st bot box
     float boxBotX = 560; //560 620
     float boxBotY = 620;
     auto boxBot = std::make_unique<GameObject>();
     boxBot->addComponent<BodyComponent>(boxBotX, boxBotY, 100, 100, 0);
     boxBot->addComponent<SpriteComponent>("wall1", "box2");
     gameObjects.push_back(std::move(boxBot));
-
+    //2nd bot box
     float box3X = 2000; //560 620
     float box3Y = 620;
     auto box3 = std::make_unique<GameObject>();
     box3->addComponent<BodyComponent>(box3X, box3Y, 100, 100, 0);
     box3->addComponent<SpriteComponent>("wall1", "box3");
     gameObjects.push_back(std::move(box3));
-
+    //2nd top box
     float box4X = 2000; //560 620
     float box4Y = 67;
     auto box4 = std::make_unique<GameObject>();
@@ -365,7 +353,57 @@ void Engine::createWorld() {
     box4->addComponent<SpriteComponent>("wall1", "box4");
     gameObjects.push_back(std::move(box4));
 
+    boxTopX = 1850; //560 620
+    boxTopY = 67;
+    auto boxTop2 = std::make_unique<GameObject>();
+    boxTop2->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
+    boxTop2->addComponent<SpriteComponent>("wall1", "box1");
+    gameObjects.push_back(std::move(boxTop2));
+    //1st bot box
+    boxBotX = 1850; //560 620
+    boxBotY = 620;
+    auto boxBot2 = std::make_unique<GameObject>();
+    boxBot2->addComponent<BodyComponent>(boxBotX, boxBotY, 100, 100, 0);
+    boxBot2->addComponent<SpriteComponent>("wall1", "box2");
+    gameObjects.push_back(std::move(boxBot2));
 
+
+    //3rd set
+    box3X = 3290; //560 620
+    box3Y = 620;
+    auto box33 = std::make_unique<GameObject>();
+    box33->addComponent<BodyComponent>(box3X, box3Y, 100, 100, 0);
+    box33->addComponent<SpriteComponent>("wall1", "box3");
+    gameObjects.push_back(std::move(box33));
+    //2nd top box
+    box4X = 3290; //560 620
+    box4Y = 67;
+    auto box43 = std::make_unique<GameObject>();
+    box43->addComponent<BodyComponent>(box4X, box4Y, 100, 100, 0);
+    box43->addComponent<SpriteComponent>("wall1", "box4");
+    gameObjects.push_back(std::move(box43));
+
+    boxTopX = 3140; //560 620
+    boxTopY = 67;
+    auto boxTop23 = std::make_unique<GameObject>();
+    boxTop23->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
+    boxTop23->addComponent<SpriteComponent>("wall1", "box1");
+    gameObjects.push_back(std::move(boxTop23));
+    //1st bot box
+    boxBotX = 3140; //560 620
+    boxBotY = 620;
+    auto boxBot23 = std::make_unique<GameObject>();
+    boxBot23->addComponent<BodyComponent>(boxBotX, boxBotY, 100, 100, 0);
+    boxBot23->addComponent<SpriteComponent>("wall1", "box2");
+    gameObjects.push_back(std::move(boxBot23));
+
+    //enemy in zone 3
+    boxBotX = 2900; //560 620
+    boxBotY = 350;
+    auto boxBotEnemy = std::make_unique<GameObject>();
+    boxBotEnemy->addComponent<BodyComponent>(boxBotX, boxBotY, 100, 100, 0);
+    boxBotEnemy->addComponent<SpriteComponent>("enemy", "enemy");
+    gameObjects.push_back(std::move(boxBotEnemy));
 
 }
 

@@ -6,17 +6,6 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
     // Create a Box2D body
     b2BodyDef bodyDef;
     
-    //// Convert to pixels for SDL
-    //int xpos = static_cast<int>(x * Engine::scale);
-    //int ypos = static_cast<int>(y * Engine::scale);
-
-    //// Define SDL rectangle (in pixels)
-    ////SDL_Rect rect;
-    //rect.x = xpos - static_cast<int>(m_width * Engine::scale / 2);
-    //rect.y = ypos - static_cast<int>(m_height * Engine::scale / 2);
-    //rect.w = static_cast<int>(m_width * Engine::scale);
-    //rect.h = static_cast<int>(m_height * Engine::scale);
-    
     switch (bodyType) {
     case 0:
         std::cout << " dynamic" << std::endl;
@@ -31,16 +20,11 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
         std::cout << parent.getComponent<SpriteComponent>()->getName() << " " << " kinematic" << std::endl;
         break;
     }
-    //bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set((float)x , (float)y);
     bodyDef.linearDamping = 0.0f;
     bodyDef.angularDamping = 0.0f;
     m_body = Engine::m_world->CreateBody(&bodyDef);
-    if (bodyDef.type == b2_dynamicBody)
-    {
-        //m_body->SetLinearVelocity(b2Vec2(0.0f,10.0f));
-    }
-    // Attach a rectangular fixture
+   
     b2PolygonShape boxShape;
     boxShape.SetAsBox((float)m_width  /  2.0f, (float)m_height  /  2.0f);//add scale
 
@@ -49,18 +33,11 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
     fixtureDef.shape = &boxShape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
-    //std::cout << parent.getComponent<SpriteComponent>()->getName();
     
     fixtureDef.filter.maskBits = 0xFFFF;
-    
-    
+ 
     m_body->GetUserData().pointer = (uintptr_t)this;
     m_body->CreateFixture(&fixtureDef);
-
-    // Set SDL rect dimensions in pixels
-        //rect.w = static_cast<int>(width);
-        //rect.h = static_cast<int>(height);
-
 }
 
 //double& BodyComponent::getX() { return m_xPos; }

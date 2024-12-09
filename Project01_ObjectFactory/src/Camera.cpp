@@ -20,16 +20,13 @@ SDL_Point Camera::transformPoint(float x, float y) const {
 }
 SDL_Rect Camera::transformRect(const SDL_Rect& rect) const {
 	SDL_Rect transformed;
-	/*transformed.x = static_cast<int>((rect.x - centerX) * scale);
-	transformed.y = static_cast<int>((rect.y - centerY) * scale);
-	transformed.w = static_cast<int>(rect.w * scale);
-	transformed.h = static_cast<int>(rect.h * scale);*/
+	
 	int h = 720;
 	int w = 1280;
-	// Translate the position to keep player at the center of the screen
+	
 	transformed.x = static_cast<int>((rect.x - m_centerX)  + w / 2);
 	transformed.y = static_cast<int>((rect.y - m_centerY)  + h / 2);
-	// Scale the width and height
+	
 	transformed.w = static_cast<int>(rect.w );
 	transformed.h = static_cast<int>(rect.h );
 

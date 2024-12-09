@@ -22,8 +22,6 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
         if (obj["components"].contains("SpriteComponent")) {
             texture = obj["components"]["SpriteComponent"]["texture"];
             name = obj["components"]["SpriteComponent"]["name"];
-            //width = obj["components"]["SpriteComponent"]["width"];
-            //height = obj["components"]["SpriteComponent"]["height"];
             gameObject->addComponent<SpriteComponent>(texture, name);
         }
 
@@ -32,25 +30,26 @@ GameObjectLoader::GameObjectLoader(const std::string& objectFilePath) {
             gameObject->addComponent<CharacterControllerComponent>(speed);
         }
 
-        /*if (obj["components"].contains("FollowComponent")) {
-            std::string targetName = obj["components"]["FollowComponent"]["target"];
-            int distance = obj["components"]["FollowComponent"]["distance"];
-            GameObject* target = Engine::mapGameObjects[targetName].get();
-            gameObject->addComponent<FollowComponent>(target, distance);
-        }*/
-
         if (obj["components"].contains("MoveUpAndDownComponent")) {
             int range = obj["components"]["MoveUpAndDownComponent"]["range"];
             float speed = obj["components"]["MoveUpAndDownComponent"]["speed"];
             gameObject->addComponent<MoveUpAndDownComponent>(range, speed);
         }
 
-        /*if (obj["components"].contains("Box2DComponent")) {
-            auto bodyType = obj["components"]["Box2DComponent"]["bodyType"];
-            gameObject->addComponent<Box2DComponent>();
-        }*/
-
-        //Engine::mapGameObjects.insert({ name, std::move(gameObject) });
         Engine::addGameObject(std::move(gameObject));
     }
 }
+
+
+
+/*if (obj["components"].contains("FollowComponent")) {
+    std::string targetName = obj["components"]["FollowComponent"]["target"];
+    int distance = obj["components"]["FollowComponent"]["distance"];
+    GameObject* target = Engine::mapGameObjects[targetName].get();
+    gameObject->addComponent<FollowComponent>(target, distance);
+}*/
+
+/*if (obj["components"].contains("Box2DComponent")) {
+          auto bodyType = obj["components"]["Box2DComponent"]["bodyType"];
+          gameObject->addComponent<Box2DComponent>();
+      }*/

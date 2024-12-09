@@ -23,37 +23,34 @@ void SpriteComponent::update(){
 void SpriteComponent::draw() {
     auto body = getParent().getComponent<BodyComponent>();
     if (body) {
-        // Define destination rectangle based on the position from the BodyComponent
-        //SDL_Rect dst = {static_cast<int>(body->getBody()->GetPosition().x), static_cast<int>(body->getBody()->GetPosition().y), static_cast<int>(body->getWidth()), static_cast<int>(body->getHeight()) };
         int x = static_cast<int>(body->getBody()->GetPosition().x );
         int y = static_cast<int>(body->getBody()->GetPosition().y );
 
-        // Define SDL rectangle (in pixels)
         SDL_Rect rect;
         rect.x = x - static_cast<int>(body->m_width/2);
         rect.y = y - static_cast<int>(body->m_height/2);
-        //rect.x = x - static_cast<int>(body->m_width / 2);
-        //rect.y = y - static_cast<int>(body->m_height / 2);
+        
         rect.w = static_cast<int>(body->m_width );
         rect.h = static_cast<int>(body->m_height );
 
-        if (Input::isKeyDown(SDLK_LEFT))
+        if (Input::isKeyDown(SDLK_LEFT ))//|| SDLK_a
+        {
+            flip = SDL_FLIP_HORIZONTAL;
+        }
+        if (Input::isKeyDown(SDLK_a))//|| SDLK_a
         {
             flip = SDL_FLIP_HORIZONTAL;
         }
 
-        if (Input::isKeyDown(SDLK_RIGHT))
+        if (Input::isKeyDown(SDLK_RIGHT  ))//|| SDLK_d
         {
             flip = SDL_FLIP_NONE;
         }
-        //if (body->m_body->GetLinearVelocity().x <= -0.01) {  // Facing left
-        //    flip = SDL_FLIP_HORIZONTAL;
-        //}
-        //
-        //else { flip = SDL_FLIP_NONE;
-        //}
-
-        // Transform the destination rectangle to account for the view (camera) position and scale
+        if (Input::isKeyDown(SDLK_d))//|| SDLK_d
+        {
+            flip = SDL_FLIP_NONE;
+        }
+        
         SDL_Rect transformedDst = Engine::camera.transformRect(rect);
 
         // Render the texture using the transformed rectangle
@@ -64,4 +61,4 @@ void SpriteComponent::draw() {
 std::string SpriteComponent::getName() {
     return m_name;
 }
-//SDL_RendererFlip SpriteComponent::flip = SDL_FLIP_NONE;
+
