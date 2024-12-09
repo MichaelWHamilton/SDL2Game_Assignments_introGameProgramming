@@ -37,15 +37,19 @@ public:
     static void spawnObject();
 
     static void createWorld();
+    static void grabObjects();
+    static void createWall(float x, float y, float width, float height);
     static void loadPlayer();
     static Camera camera;
     static SDL_Renderer* getRenderer();
     static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;
     static int screenWidth;
     static int screenHeight;
+    static int tileSize;
     static b2World* m_world;
     static float scale;
     static GameObject* player;
+    static b2Joint* joint;
 private:
     static bool isRunning;                               
     static SDL_Window* window; 

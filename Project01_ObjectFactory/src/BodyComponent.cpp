@@ -16,20 +16,23 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
     //rect.y = ypos - static_cast<int>(m_height * Engine::scale / 2);
     //rect.w = static_cast<int>(m_width * Engine::scale);
     //rect.h = static_cast<int>(m_height * Engine::scale);
-
+    
     switch (bodyType) {
-    case b2_dynamic:
+    case 0:
+        std::cout << " dynamic" << std::endl;
         bodyDef.type = b2_dynamicBody;
         break;
-    case b2_static:
+    case 1:
         bodyDef.type = b2_staticBody;
+        std::cout << " static" << std::endl;
         break;
-    case b2_kinematic:
+    case 2:
         bodyDef.type = b2_kinematicBody;
+        std::cout << parent.getComponent<SpriteComponent>()->getName() << " " << " kinematic" << std::endl;
         break;
     }
     //bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set((float)x , (float)y * 1.0f );
+    bodyDef.position.Set((float)x , (float)y);
     bodyDef.linearDamping = 0.0f;
     bodyDef.angularDamping = 0.0f;
     m_body = Engine::m_world->CreateBody(&bodyDef);
@@ -48,7 +51,7 @@ BodyComponent::BodyComponent(GameObject& parent, double x, double y, double widt
     fixtureDef.friction = 0.3f;
     //std::cout << parent.getComponent<SpriteComponent>()->getName();
     
-        fixtureDef.filter.maskBits = 0x0000;
+    fixtureDef.filter.maskBits = 0xFFFF;
     
     
     m_body->GetUserData().pointer = (uintptr_t)this;

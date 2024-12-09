@@ -30,8 +30,8 @@ void SpriteComponent::draw() {
 
         // Define SDL rectangle (in pixels)
         SDL_Rect rect;
-        rect.x = x - static_cast<int>(body->m_width);
-        rect.y = y - static_cast<int>(body->m_height);
+        rect.x = x - static_cast<int>(body->m_width/2);
+        rect.y = y - static_cast<int>(body->m_height/2);
         //rect.x = x - static_cast<int>(body->m_width / 2);
         //rect.y = y - static_cast<int>(body->m_height / 2);
         rect.w = static_cast<int>(body->m_width );

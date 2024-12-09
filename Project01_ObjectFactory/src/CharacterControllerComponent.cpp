@@ -132,6 +132,8 @@ void CharacterControllerComponent::update() {
         body->SetLinearVelocity(b2Vec2(0.0f, velocityY));
     }
     else body->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+
+    
     // Set the body's linear velocity
     //body->m_body->SetLinearVelocity(velocity);
 

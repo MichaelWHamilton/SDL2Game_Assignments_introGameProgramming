@@ -18,6 +18,7 @@ public:
 private:
     float m_speed;
     float m_jumpForce;
+    
 
     //void move(float dx, float dy);
 };

@@ -9,22 +9,25 @@ Box2DComponent::Box2DComponent(GameObject& parent)
         throw std::runtime_error("Box2DComponent requires a BodyComponent in the same GameObject.");
         exit;
     }
-
+    std::cout << " creating body " << std::endl;
     // Create a Box2D body
     b2BodyDef bodyDef;
     Box2DBodyType bodyType = box2DDynamic;
     switch (bodyType) {
     case box2DDynamic:
+        std::cout << parent.getComponent<SpriteComponent>()->getName() << " " << " dynamic" << std::endl;
         bodyDef.type = b2_dynamicBody;
         break;
     case box2DStatic:
         bodyDef.type = b2_staticBody;
+        std::cout << parent.getComponent<SpriteComponent>()->getName() << " " << " static" << std::endl;
         break;
     case box2DKinematic:
         bodyDef.type = b2_kinematicBody;
+        std::cout << parent.getComponent<SpriteComponent>()->getName() << " " << " kinematic" << std::endl;
         break;
     }
-
+    
     //bodyDef.position.Set((float)bodyComp->getX(), (float)bodyComp->getY());
     m_body = Engine::m_world->CreateBody(&bodyDef);
 
