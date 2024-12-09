@@ -1,63 +1,7 @@
-//#include "CharacterControllerComponent.h"
-//#include "ComponentsInclude.h"
-//
-//CharacterControllerComponent::CharacterControllerComponent(GameObject& owner, float speed)
-//    : Component(owner), m_speed(speed) {}
-//
-//void CharacterControllerComponent::update(){
-//
-//    std::cout << "charactercontroller update called" << std::endl;
-//
-//
-//    const Uint8* state = SDL_GetKeyboardState(nullptr);
-//    if (state[SDL_SCANCODE_W]) { move(0, -1); }
-//    if (state[SDL_SCANCODE_S]) { move(0, 1); }
-//    if (state[SDL_SCANCODE_A]) { move(-1, 0); }
-//    if (state[SDL_SCANCODE_D]) { move(1, 0); }
-//
-//    //const Uint8* state = SDL_GetKeyboardState(nullptr);
-//
-//    //// Start with zero velocity
-//    //b2Vec2 velocity(0.0f, 0.0f);
-//
-//    //// Adjust velocity based on input
-//    //if (state[SDL_SCANCODE_UP]) {
-//    //    velocity.y = -m_speed;  // Move up
-//    //}
-//    //if (state[SDL_SCANCODE_DOWN]) {
-//    //    velocity.y = m_speed;  // Move down
-//    //}
-//    //if (state[SDL_SCANCODE_LEFT]) {
-//    //    velocity.x = -m_speed;  // Move left
-//    //}
-//    //if (state[SDL_SCANCODE_RIGHT]) {
-//    //    velocity.x = m_speed;  // Move right
-//    //}
-//
-//    //// Set the body's linear velocity
-//    //auto body = getParent().getComponent<BodyComponent>();
-//    //body->m_body->SetLinearVelocity(velocity);
-//
-//    //// Synchronize position variables for the sprite update
-//    //body->setX(body->m_body->GetPosition().x);
-//    //body->setY(body->m_body->GetPosition().y);
-//}
-//
-//void CharacterControllerComponent::draw(){}
-//
-//void CharacterControllerComponent::move(float dx, float dy) {
-//    auto body = getParent().getComponent<BodyComponent>();
-//    if (body) {
-//        //body->m_body->SetLinearVelocity();
-//        //body->getX() += dx * m_speed;
-//        //body->getY() += dy * m_speed;
-//        /*b2Vec2* x = new b2Vec2(dx, dy);
-//        body->m_body->SetLinearVelocity(*x);*/
-//    }
-//}
 
 #include "CharacterControllerComponent.h"
 #include "ComponentsInclude.h"
+#include "SDL2/SDL_mixer.h"
 CharacterControllerComponent::CharacterControllerComponent(GameObject& parent, float speed)
     : Component(parent), m_speed(speed), m_jumpForce(50.0f) {}
 
@@ -101,7 +45,7 @@ void CharacterControllerComponent::update() {
     if (!body) return;
 
     b2Vec2 velocity(0.0f, 0.0f);
-
+    body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
     // Horizontal movement
     if (Input::isKeyDown(SDLK_LEFT) || Input::isKeyDown(SDLK_a)) {
         //velocity.x = -m_speed; // Move left
@@ -111,7 +55,7 @@ void CharacterControllerComponent::update() {
         float velocityY = m_speed / Engine::scale ;
         body->SetLinearVelocity(b2Vec2(velocityX, 0.0f));
     }
-    else if (Input::isKeyDown(SDLK_RIGHT) || Input::isKeyDown(SDLK_d)) {
+    if (Input::isKeyDown(SDLK_RIGHT) || Input::isKeyDown(SDLK_d)) {
         velocity.x = m_speed; // Move right
         float velocityX = m_speed / Engine::scale * 10;
         float velocityY = m_speed / Engine::scale ;
@@ -119,21 +63,29 @@ void CharacterControllerComponent::update() {
     }
 
     // Vertical movement
-    else if (Input::isKeyDown(SDLK_UP) || Input::isKeyDown(SDLK_w)) {
+    if (Input::isKeyDown(SDLK_UP) || Input::isKeyDown(SDLK_w)) {
         velocity.y = -m_speed; // Move up
         float velocityX = m_speed / Engine::scale ;
         float velocityY = -m_speed / Engine::scale * 10;
         body->SetLinearVelocity(b2Vec2(0.0f, velocityY));
     }
-    else if (Input::isKeyDown(SDLK_DOWN) || Input::isKeyDown(SDLK_s)) {
+    if (Input::isKeyDown(SDLK_DOWN) || Input::isKeyDown(SDLK_s)) {
         velocity.y = m_speed; // Move down
         float velocityX = m_speed / Engine::scale ;
         float velocityY = m_speed / Engine::scale * 10;
         body->SetLinearVelocity(b2Vec2(0.0f, velocityY));
     }
-    else body->SetLinearVelocity(b2Vec2(0.0f,0.0f));
+    //else body->SetLinearVelocity(b2Vec2(0.0f,0.0f));
 
-    
+    if (body->GetLinearVelocity().x > 0 || body->GetLinearVelocity().y > 0)
+    {
+        std::cout << "Playing music " << std::endl;
+        //Mix_PlayMusic(Engine::m_gameMusic, -1);
+    }
+    else {
+        std::cout << "Stopping music " << std::endl;
+        //Mix_HaltMusic();
+    }
     // Set the body's linear velocity
     //body->m_body->SetLinearVelocity(velocity);
 

@@ -1,8 +1,18 @@
 #include "Engine.h"
 #include "ComponentsInclude.h"
+#include "SDL2/SDL_mixer.h"
 // Initialize the Engine (static)
 bool Engine::init(const char* title, int width, int height) {
     //Engine::width = width;
+    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+        std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
+        return -1;
+    }
+
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cerr << "Failed to initialize SDL_mixer: " << Mix_GetError() << std::endl;
+        return -1;
+    }
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         SDL_Log("Failed to initialize SDL: %s", SDL_GetError());
         return false;
@@ -103,6 +113,8 @@ void Engine::clean() {
     if (window) {
         SDL_DestroyWindow(window);
     }
+    Mix_FreeMusic(m_gameMusic);
+    Mix_CloseAudio();
     SDL_Quit();
 };
 void Engine::grabObjects() {
@@ -184,6 +196,7 @@ void Engine::addGameObject(std::unique_ptr<GameObject> gameObject) {
 void Engine::run() {
     createWorld();
     loadPlayer();
+    loadMusic();
     player = gameObjects.back().get();
     while (isRunning) {
         update();
@@ -324,12 +337,12 @@ void Engine::createWorld() {
 
     //float boxW = 100;
     //float boxH = 100;
-    //float boxTopX = 560; //560 620
-    //float boxTopY = 67;
-    //auto boxTop = std::make_unique<GameObject>();
-    //boxTop->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
-    //boxTop->addComponent<SpriteComponent>("wall1", "box1");
-    //gameObjects.push_back(std::move(boxTop));
+    float boxTopX = 560; //560 620
+    float boxTopY = 67;
+    auto boxTop = std::make_unique<GameObject>();
+    boxTop->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
+    boxTop->addComponent<SpriteComponent>("wall1", "box1");
+    gameObjects.push_back(std::move(boxTop));
 
     float boxBotX = 560; //560 620
     float boxBotY = 620;
@@ -344,6 +357,14 @@ void Engine::createWorld() {
     box3->addComponent<BodyComponent>(box3X, box3Y, 100, 100, 0);
     box3->addComponent<SpriteComponent>("wall1", "box3");
     gameObjects.push_back(std::move(box3));
+
+    float box4X = 2000; //560 620
+    float box4Y = 67;
+    auto box4 = std::make_unique<GameObject>();
+    box4->addComponent<BodyComponent>(box4X, box4Y, 100, 100, 0);
+    box4->addComponent<SpriteComponent>("wall1", "box4");
+    gameObjects.push_back(std::move(box4));
+
 
 
 }
@@ -379,6 +400,19 @@ void Engine::spawnObject() {
     
     //mapGameObjects.insert({ "spawnable", std::move(obj) });
 }
+
+void Engine::loadMusic() {
+    Mix_Music* m_gameMusic = Mix_LoadMUS(".\\assets\\sounds\\maingamemusic-6082.ogg");
+
+    if (!m_gameMusic) {
+        std::cerr << "Failed to load music: " << Mix_GetError() << std::endl;
+        return;
+    }
+
+    Mix_FadeInMusic(m_gameMusic, -1, 4000);
+    Mix_VolumeMusic(30);
+}
+
 GameObject* Engine::player = nullptr;
 float Engine::scale = 100.0f;
 bool Engine::isRunning = false;
@@ -394,4 +428,5 @@ std::vector<std::unique_ptr<GameObject>> Engine::toDelete;
 Camera Engine::camera(0.0f, 0.0f, 1.0f, 0.0f);
 b2World* Engine::m_world=nullptr;
 b2Joint* Engine::joint = nullptr;
+Mix_Music* Engine::m_gameMusic = nullptr;
 

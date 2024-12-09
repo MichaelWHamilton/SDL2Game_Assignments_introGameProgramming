@@ -6,7 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include <box2d/box2d.h>
 #include <unordered_map>
-
+#include "SDL2/SDL_mixer.h"
 class GameObject;
 class Camera;
 class Engine {
@@ -40,6 +40,7 @@ public:
     static void grabObjects();
     static void createWall(float x, float y, float width, float height);
     static void loadPlayer();
+    static void loadMusic();
     static Camera camera;
     static SDL_Renderer* getRenderer();
     static std::unordered_map<std::string, std::unique_ptr<GameObject>> mapGameObjects;
@@ -50,6 +51,7 @@ public:
     static float scale;
     static GameObject* player;
     static b2Joint* joint;
+    static Mix_Music* m_gameMusic;
 private:
     static bool isRunning;                               
     static SDL_Window* window; 
