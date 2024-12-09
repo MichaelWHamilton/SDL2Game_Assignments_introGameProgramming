@@ -329,42 +329,42 @@ void Engine::createWorld() {
     float boxTopY = 67;
     auto boxTop = std::make_unique<GameObject>();
     boxTop->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
-    boxTop->addComponent<SpriteComponent>("wall1", "box1");
+    boxTop->addComponent<SpriteComponent>("box", "box1");
     gameObjects.push_back(std::move(boxTop));
     //1st bot box
     float boxBotX = 560; //560 620
     float boxBotY = 620;
     auto boxBot = std::make_unique<GameObject>();
     boxBot->addComponent<BodyComponent>(boxBotX, boxBotY, 100, 100, 0);
-    boxBot->addComponent<SpriteComponent>("wall1", "box2");
+    boxBot->addComponent<SpriteComponent>("box", "box2");
     gameObjects.push_back(std::move(boxBot));
     //2nd bot box
     float box3X = 2000; //560 620
     float box3Y = 620;
     auto box3 = std::make_unique<GameObject>();
     box3->addComponent<BodyComponent>(box3X, box3Y, 100, 100, 0);
-    box3->addComponent<SpriteComponent>("wall1", "box3");
+    box3->addComponent<SpriteComponent>("box", "box3");
     gameObjects.push_back(std::move(box3));
     //2nd top box
     float box4X = 2000; //560 620
     float box4Y = 67;
     auto box4 = std::make_unique<GameObject>();
     box4->addComponent<BodyComponent>(box4X, box4Y, 100, 100, 0);
-    box4->addComponent<SpriteComponent>("wall1", "box4");
+    box4->addComponent<SpriteComponent>("box", "box4");
     gameObjects.push_back(std::move(box4));
 
     boxTopX = 1850; //560 620
     boxTopY = 67;
     auto boxTop2 = std::make_unique<GameObject>();
     boxTop2->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
-    boxTop2->addComponent<SpriteComponent>("wall1", "box1");
+    boxTop2->addComponent<SpriteComponent>("box", "box1");
     gameObjects.push_back(std::move(boxTop2));
     //1st bot box
     boxBotX = 1850; //560 620
     boxBotY = 620;
     auto boxBot2 = std::make_unique<GameObject>();
     boxBot2->addComponent<BodyComponent>(boxBotX, boxBotY, 50, 50, 0);
-    boxBot2->addComponent<SpriteComponent>("wall1", "box2");
+    boxBot2->addComponent<SpriteComponent>("box", "box2");
     gameObjects.push_back(std::move(boxBot2));
 
 
@@ -373,28 +373,28 @@ void Engine::createWorld() {
     box3Y = 620;
     auto box33 = std::make_unique<GameObject>();
     box33->addComponent<BodyComponent>(box3X, box3Y, 100, 100, 0);
-    box33->addComponent<SpriteComponent>("wall1", "box3");
+    box33->addComponent<SpriteComponent>("box", "box3");
     gameObjects.push_back(std::move(box33));
     //2nd top box
     box4X = 3290; //560 620
     box4Y = 67;
     auto box43 = std::make_unique<GameObject>();
     box43->addComponent<BodyComponent>(box4X, box4Y, 100, 100, 0);
-    box43->addComponent<SpriteComponent>("wall1", "box4");
+    box43->addComponent<SpriteComponent>("box", "box4");
     gameObjects.push_back(std::move(box43));
 
     boxTopX = 3140; //560 620
     boxTopY = 67;
     auto boxTop23 = std::make_unique<GameObject>();
     boxTop23->addComponent<BodyComponent>(boxTopX, boxTopY, 100, 100, 0);
-    boxTop23->addComponent<SpriteComponent>("wall1", "box1");
+    boxTop23->addComponent<SpriteComponent>("box", "box1");
     gameObjects.push_back(std::move(boxTop23));
     //1st bot box
     boxBotX = 3140; //560 620
     boxBotY = 620;
     auto boxBot23 = std::make_unique<GameObject>();
     boxBot23->addComponent<BodyComponent>(boxBotX, boxBotY, 100, 100, 0);
-    boxBot23->addComponent<SpriteComponent>("wall1", "box2");
+    boxBot23->addComponent<SpriteComponent>("box", "box2");
     gameObjects.push_back(std::move(boxBot23));
 
     //enemy in zone 3
